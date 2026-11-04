@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-variant": "#d3e4fe",
+          "surface-container": "#f1f5f9",
+          "on-primary-container": "#fdfcff",
+          "secondary-fixed": "#89f5e7",
+          "surface-tint": "#006398",
+          "inverse-on-surface": "#eaf1ff",
+          "primary": "#0284c7",
+          "on-tertiary": "#ffffff",
+          "on-surface-variant": "#475569",
+          "surface-container-lowest": "#ffffff",
+          "on-tertiary-container": "#fffbff",
+          "surface-dim": "#f1f5f9",
+          "error-container": "#fee2e2",
+          "surface-container-low": "#f8fafc",
+          "tertiary-fixed-dim": "#ffb77d",
+          "on-secondary-fixed": "#00201d",
+          "outline-variant": "#e2e8f0",
+          "on-secondary-fixed-variant": "#005049",
+          "primary-fixed-dim": "#93ccff",
+          "on-tertiary-fixed-variant": "#6e3900",
+          "on-primary-fixed-variant": "#004b73",
+          "inverse-surface": "#0f172a",
+          "secondary-container": "#ccfbf1",
+          "outline": "#94a3b8",
+          "surface-container-high": "#e2e8f0",
+          "secondary": "#0f766e",
+          "on-tertiary-fixed": "#2f1500",
+          "tertiary-container": "#d97706",
+          "on-secondary-container": "#0f766e",
+          "on-background": "#0f172a",
+          "on-error-container": "#991b1b",
+          "inverse-primary": "#93ccff",
+          "surface-bright": "#ffffff",
+          "primary-fixed": "#e0f2fe",
+          "on-error": "#ffffff",
+          "on-secondary": "#ffffff",
+          "secondary-fixed-dim": "#6bd8cb",
+          "on-primary-fixed": "#001d31",
+          "tertiary-fixed": "#fef3c7",
+          "primary-container": "#0284c7",
+          "error": "#dc2626",
+          "on-primary": "#ffffff",
+          "tertiary": "#d97706",
+          "surface-container-highest": "#cbd5e1",
+          "surface": "#ffffff",
+          "on-surface": "#0f172a",
+          "background": "#f8fafc"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.375rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-sm": "0.5rem",
+          "space-2xs": "0.125rem",
+          "margin-desktop": "1.5rem",
+          "margin": "1rem",
+          "space-2xl": "2rem",
+          "space-md": "0.75rem",
+          "gutter": "1rem",
+          "space-xs": "0.25rem",
+          "space-xl": "1.5rem",
+          "space-lg": "1rem",
+          "gutter-desktop": "1.5rem"
+        },
+        "fontFamily": {
+          "body": ["Public Sans", "sans-serif"],
+          "heading": ["Public Sans", "sans-serif"],
+          "mono": ["JetBrains Mono", "monospace"]
+        }
+      }
+    }
+  };</script></head><body class="bg-background font-body text-sm text-slate-800 antialiased"><header class="fixed top-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md z-50 border-b border-slate-200 shadow-sm"><div class="w-full h-full px-6 flex items-center justify-between gap-4"><div class="flex items-center gap-3.5 min-w-0"><img alt="Sovereign Spatial Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WAZF9CfCUrKfK6UV4WV47BYGkPtuVOw1V2elUro0o5VFeU2a6pMCBDu4iXtm2VUUnVuoNECOsSnNB5lNJcumXaJ4Kpgn-CqqgjMx-M3CJYfBdej61tUQ61nZsgdPlgiYDOGw0UV2-ZpcOpUaJve_Ljlpe-ADIWsts6QupfZT0RnydmEQFXm29qU5HnkoDGroRljTWCC6gDQQ2T2h_X4R1UtHHkf52sTmHQwhJ91Guwzw"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-1.5"><span class="font-bold text-sm tracking-wide text-slate-900 uppercase truncate">Sovereign Spatial</span><span class="text-[11px] font-semibold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700 uppercase tracking-wider">KE-MESH</span></div><span class="text-xs text-slate-500 truncate hidden sm:inline">Republic of Kenya National GIS Data Mesh</span></div></div><div class="hidden xl:flex items-center gap-3 bg-slate-50 border border-slate-200 px-3.5 py-1.5 rounded-lg"><div class="flex items-center gap-2"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span></span><span class="text-xs font-semibold text-emerald-700 uppercase">PostGIS Node 01: Synced</span></div><div class="h-3 w-px bg-slate-300"></div><div class="flex items-center gap-1 text-slate-600"><span class="material-symbols-outlined text-sm text-amber-600">radar</span><span class="text-xs font-medium tracking-tight">EPSG:3857 | Arc 1960 (UTM 37S)</span></div><div class="h-3 w-px bg-slate-300"></div><div class="text-xs text-teal-700 font-mono font-medium">1°17'34.2"S 36°49'17.8"E</div></div><div class="flex items-center gap-3"><div class="relative hidden md:flex items-center bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg"><span class="material-symbols-outlined text-sm text-slate-500 mr-2">account_balance</span><select class="bg-transparent text-xs font-medium text-slate-800 focus:outline-none cursor-pointer pr-3"><option value="kenha">KeNHA - National Highways</option><option value="ncc">Nairobi City County</option><option value="kura">KURA - Urban Roads</option><option value="kerra">KeRRA - Rural Roads</option><option value="mol">Ministry of Lands &amp; Physical Planning</option><option value="uon">Academic Portal - UoN / JKUAT</option></select></div><button class="relative p-2 rounded-lg bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-lg">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-500 rounded-full"></span></button><div class="flex items-center gap-2.5 pl-1"><img alt="Profile" class="w-8 h-8 rounded-full ring-2 ring-slate-200 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbrSloEGRcCW0XpHVnD4R0wt3Dg7gFgsP8pSQ_J0G9RYCnZzsrZMHNw6jn1SW0_KyuQaiFy9do3a0fSlxxrdG0djNWUyxdJfLZmYS-VxsE9NahsA363oH49Y-WircKrMx0PhBqK9OnQ0CWJmYRZJkNyimWA37-CRCIby6dyMxanh85wtxFl_PhG6hNGZv-ooaw8kRBebu-DHn9GXoSbPtcQFQlkDEWg7ZAIyBxj137"/><div class="hidden 2xl:flex flex-col text-left"><span class="text-xs font-semibold text-slate-900 leading-tight">Eng. K. Kiprop</span><span class="text-[11px] text-slate-500 leading-tight">Chief Cadastral Surveyor</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-white border-r border-slate-200 z-40 flex flex-col justify-between"><div class="flex flex-col flex-1 overflow-y-auto px-4 py-5"><div class="px-3 mb-2"><span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">Spatial Mesh Governance</span></div><nav class="flex flex-col gap-1"><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium text-xs" data-path="dashboard-and-mesh" href="#"><span class="material-symbols-outlined text-lg">dashboard</span><span>Dashboard &amp; Mesh</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium text-xs" data-path="encroachment-and-subdivision" href="#"><span class="material-symbols-outlined text-lg">polyline</span><span>Encroachment &amp; Subdivision</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium text-xs" data-path="ai-multimodal-extraction" href="#"><span class="material-symbols-outlined text-lg">document_scanner</span><span>AI Multimodal Extraction</span></a><a aria-current="page" class="flex items-center gap-3 px-3 py-2 transition-all bg-sky-600 text-white font-semibold rounded-lg shadow-sm text-xs" data-path="g2g-spatial-repository" href="#"><span class="material-symbols-outlined text-lg">share_location</span><span>G2G Spatial Repository</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium text-xs" data-path="academic-and-research" href="#"><span class="material-symbols-outlined text-lg">school</span><span>Academic &amp; Research</span></a></nav><div class="mt-6 px-3 mb-2"><span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">Security Infrastructure</span></div><nav class="flex flex-col gap-1"><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium text-xs" data-path="authentication-and-rls" href="#"><span class="material-symbols-outlined text-lg">security</span><span>Authentication &amp; RLS</span></a></nav></div><div class="p-3 bg-slate-50 m-4 rounded-lg border border-slate-200 flex flex-col gap-1"><div class="flex items-center justify-between"><span class="text-xs font-medium text-slate-700">Sovereign Ledger</span><span class="text-[11px] font-semibold text-sky-700 uppercase">v3.8-G2G</span></div><div class="text-xs text-slate-500 font-mono truncate">Node: KE-NRB-POSTGIS-09</div><div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden mt-1"><div class="bg-sky-600 h-full w-5/6"></div></div></div></aside><div class="pl-72"><main class="relative w-full pt-16 min-h-screen bg-slate-50"><div class="flex flex-col w-full">
+<div class="w-full px-6 py-6 flex flex-col gap-6">
+<!-- Header Protocol Ribbon & Telemetry -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-sky-100 text-sky-800 text-xs font-semibold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">hub</span>
+            G2G Protocol Mesh Active
+          </span>
+<span class="text-slate-300 text-xs">•</span>
+<span class="text-slate-500 text-xs uppercase tracking-widest font-mono font-medium">KEN-SPATIAL-ACT-2019-SEC14</span>
+</div>
+<h1 class="text-2xl font-bold text-slate-900 tracking-tight">National G2G Spatial Data Exchange</h1>
+<p class="text-sm text-slate-600 max-w-3xl leading-relaxed">
+          Unified sovereign repository arbitrating cross-jurisdictional zoning conflicts, gazetted easements, and inter-county cadastral boundaries with real-time cryptographic sync.
+        </p>
+</div>
+<!-- Quick Metrics Strip -->
+<div class="flex items-center gap-2 bg-white border border-slate-200 p-2 rounded-xl shadow-sm">
+<div class="flex flex-col px-3 py-1 border-r border-slate-200">
+<span class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Active Endpoints</span>
+<span class="text-base font-bold text-sky-700 font-mono">142 WFS/OGC</span>
+</div>
+<div class="flex flex-col px-3 py-1 border-r border-slate-200">
+<span class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Counties Synced</span>
+<span class="text-base font-bold text-amber-600 font-mono">47 / 47</span>
+</div>
+<div class="flex flex-col px-3 py-1">
+<span class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Overlap Latency</span>
+<span class="text-base font-bold text-teal-700 font-mono">&lt; 140ms</span>
+</div>
+</div>
+</div>
+<!-- Tier Filter & Layer Type Control Deck -->
+<div class="w-full bg-white border border-slate-200 p-4 rounded-xl flex flex-col gap-3.5 shadow-sm">
+<!-- Tier Selector Switchers -->
+<div class="flex flex-wrap items-center justify-between gap-3">
+<div class="flex flex-wrap items-center gap-2">
+<span class="text-xs font-semibold text-slate-500 uppercase mr-1 tracking-wider">Agency Sphere:</span>
+<button class="px-3 py-1.5 rounded-lg bg-sky-600 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-sm">map</span>
+            All 47 Counties
+          </button>
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm text-slate-500">traffic</span>
+            National Parastatals: KeNHA / KURA / KeRRA
+          </button>
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm text-slate-500">forest</span>
+            Environmental: NEMA / KFS Forests
+          </button>
+<button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm text-slate-500">water_drop</span>
+            Water &amp; Utilities: Athi Water / KPLC
+          </button>
+</div>
+<!-- Search & Coordinate Precision -->
+<div class="flex items-center gap-2 min-w-[280px]">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-base text-slate-400">search</span>
+<input class="w-full bg-slate-50 text-slate-900 border border-slate-200 placeholder:text-slate-400 text-xs pl-8 pr-3 py-1.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 font-medium" placeholder="Search gazetted layers, RIMs, acts..." type="text"/>
+</div>
+<button class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 transition-colors" title="Spatial Query Filters">
+<span class="material-symbols-outlined text-base">tune</span>
+</button>
+</div>
+</div>
+<!-- Layer Types Pills Strip -->
+<div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mr-1">Vector Domain:</span>
+<button class="px-2.5 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-200 text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-sky-600">check_circle</span>
+          Zoning Amendments
+        </button>
+<button class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 hover:text-slate-900 text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-slate-500">grid_goldenratio</span>
+          Cadastral RIMs
+        </button>
+<button class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 hover:text-slate-900 text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-slate-500">water_loss</span>
+          Riparian &amp; Forest Buffers
+        </button>
+<button class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 hover:text-slate-900 text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-slate-500">alt_route</span>
+          Road Reserves
+        </button>
+<button class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 hover:text-slate-900 text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-slate-500">domain</span>
+          Gazetted Infrastructure
+        </button>
+<div class="ml-auto text-slate-500 text-xs flex items-center gap-1.5 font-mono">
+<span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+          Mesh Consensus: Block #882,901 Verified
+        </div>
+</div>
+</div>
+<!-- Main Spatial Explorer Cockpit: Split Map View & Catalog Data Stream -->
+<div class="w-full grid grid-cols-1 xl:grid-cols-12 gap-6">
+<!-- Left Cartographic HUD & Conflict Inspector (7 cols) -->
+<div class="xl:col-span-7 flex flex-col gap-4">
+<!-- Live Map Canvas Card -->
+<div class="relative w-full rounded-xl overflow-hidden bg-white border border-slate-200 shadow-sm flex flex-col">
+<!-- Tactical HUD Header Overlay -->
+<div class="absolute top-3 left-3 right-3 z-20 flex items-center justify-between pointer-events-none">
+<div class="flex items-center gap-2 pointer-events-auto bg-white/95 backdrop-blur-md border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-xs font-bold text-slate-800 uppercase tracking-wide">Live Viewport: Greater Nairobi Arc</span>
+<span class="text-xs text-slate-500 font-mono font-medium">1:25,000</span>
+</div>
+<div class="flex items-center gap-1.5 pointer-events-auto bg-white/95 backdrop-blur-md border border-slate-200 p-1 rounded-lg shadow-sm">
+<button class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-medium hover:bg-slate-200 transition-colors">
+                Orthophoto + Mesh
+              </button>
+<button class="px-2.5 py-1 rounded-md bg-sky-600 text-white text-xs font-semibold transition-colors shadow-sm">
+                Vector Cadastre
+              </button>
+<button class="p-1 text-slate-500 hover:text-slate-800 rounded hover:bg-slate-100" title="Expand Viewport">
+<span class="material-symbols-outlined text-base">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- Light, Crisp Map Visual Pipeline with Tactical Overlays -->
+<div class="w-full h-[460px] bg-cover bg-center relative" data-location="Nairobi, Kenya" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD20KTMRtQwpKJbF6L995mfRDaD9HPXfapfSIWOdVrIioQFkZdMZ6nD3Gpb2d_cqfcUiVsfzcpBWiHTxYQLyISm8CQl03BxI6HPIg_asv2c5LtiOJh_p4sVnAZyurb3kDqe9jxsSDJAXQy-SXRbfC9Yh3fCLQR6E_6PaWbNkqKRViNha_QqPHYPn73YKK9pFadYSQ4hj3yWEEADtoRMs2CpoWBBJqEjDh6Z5-r_We9j')">
+<!-- Subtle light tint overlay for cartographic clarity -->
+<div class="absolute inset-0 bg-slate-900/10 pointer-events-none"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-white/40 pointer-events-none"></div>
+<!-- Tactical Coordinate Reticle & Buffer Overlay Graphics -->
+<div class="absolute inset-0 pointer-events-none p-6 flex flex-col justify-between">
+<!-- Corner Marks -->
+<div class="flex justify-between w-full opacity-60">
+<div class="w-6 h-6 border-t-2 border-l-2 border-sky-600"></div>
+<div class="w-6 h-6 border-t-2 border-r-2 border-sky-600"></div>
+</div>
+<!-- Visual Spatial Conflict Indicator -->
+<div class="self-center bg-white/95 backdrop-blur-md p-4 rounded-xl border border-slate-200 shadow-xl max-w-sm pointer-events-auto">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-amber-600 text-lg">warning</span>
+<span class="text-xs font-bold text-slate-900 uppercase">Inter-Agency Buffer Intersection</span>
+</div>
+<p class="text-xs text-slate-600 leading-relaxed">
+                  Co-terminal parcel boundary verified. KeNHA A2 corridor easement (60m) overlaps Kiambu County physical scheme parcel <span class="font-mono font-semibold text-amber-700">#KB/THK/4910</span>. Auto-quarantine activated.
+                </p>
+<div class="mt-3 flex items-center justify-between pt-2.5 border-t border-slate-100">
+<span class="text-[11px] text-slate-500 font-mono font-medium">DELTA: +0.000m (ZERO GAP)</span>
+<button class="px-2.5 py-1 rounded-md bg-sky-600 text-white text-xs font-semibold hover:bg-sky-700 transition-colors shadow-sm">
+                    Audit Topology
+                  </button>
+</div>
+</div>
+<!-- Bottom Reticle -->
+<div class="flex justify-between items-end w-full">
+<div class="w-6 h-6 border-b-2 border-l-2 border-sky-600 opacity-60"></div>
+<!-- HUD Readout Chip -->
+<div class="bg-white/95 backdrop-blur-md px-3 py-1 rounded-md border border-slate-200 font-mono text-xs text-slate-700 font-medium shadow-sm">
+                  EXTENT: [36.7289°E, 1.3421°S] - [37.0112°E, 1.1528°S] EPSG:3857
+                </div>
+<div class="w-6 h-6 border-b-2 border-r-2 border-sky-600 opacity-60"></div>
+</div>
+</div>
+</div>
+<!-- Bottom Map Toolstrip -->
+<div class="px-4 py-3 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-4">
+<label class="flex items-center gap-2 text-slate-700 text-xs font-medium cursor-pointer">
+<input checked="" class="accent-sky-600 rounded text-sky-600 focus:ring-sky-500" type="checkbox"/>
+                KeNHA Trunk Corridors (Gazetted)
+              </label>
+<label class="flex items-center gap-2 text-slate-700 text-xs font-medium cursor-pointer">
+<input checked="" class="accent-sky-600 rounded text-sky-600 focus:ring-sky-500" type="checkbox"/>
+                NEMA Riparian 30m
+              </label>
+<label class="flex items-center gap-2 text-slate-700 text-xs font-medium cursor-pointer">
+<input checked="" class="accent-sky-600 rounded text-sky-600 focus:ring-sky-500" type="checkbox"/>
+                County Boundary Mesh
+              </label>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-500 font-medium">Layer Opacity:</span>
+<div class="w-24 bg-slate-200 h-1.5 rounded-full overflow-hidden">
+<div class="bg-sky-600 h-full w-4/5"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- 'Cross-County Border Alignment' Widget (Updated Wording) -->
+<div class="w-full bg-white border border-slate-200 p-5 rounded-xl shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">compare_arrows</span>
+</div>
+<div class="flex flex-col">
+<span class="text-base font-bold text-slate-900">Cross-County Border Alignment</span>
+<span class="text-xs text-slate-500">Arbitrating zero-slippage topology across 47 devolved jurisdictions</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200 font-mono text-xs font-semibold text-emerald-700">
+              SYNCHRONIZED ZERO-GAP
+            </span>
+</div>
+<!-- Comparison Micro Graphic / Topological Pipeline -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<!-- County A Vector Card -->
+<div class="bg-slate-50 border border-slate-200 p-3.5 rounded-lg flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-slate-900">Nairobi City County</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+<span class="text-xs text-slate-500">Zone: Northern Planning Envelope</span>
+<div class="text-slate-800 font-mono text-xs mt-1 font-semibold">RIM 41 / Parcel Sec 9</div>
+<div class="mt-2 text-sky-700 text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-sky-600">verified</span>
+                Signed by Chief County Planner
+              </div>
+</div>
+<!-- Border Matching Tool (Updated wording) -->
+<div class="bg-slate-100/70 border border-slate-200 p-3.5 rounded-lg flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-2xl text-teal-700 mb-1">lock_reset</span>
+<span class="text-xs text-slate-900 font-bold uppercase tracking-wider">Border Matching Tool</span>
+<span class="text-xs text-slate-600 mt-1">Overlapping Silver Parcels: 0</span>
+<span class="font-mono text-amber-700 text-xs font-semibold mt-1">Snap Tolerance: 0.002m</span>
+</div>
+<!-- County B Vector Card -->
+<div class="bg-slate-50 border border-slate-200 p-3.5 rounded-lg flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-slate-900">Kiambu County Gov.</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+<span class="text-xs text-slate-500">Zone: Ruiru / Juja Border Fringe</span>
+<div class="text-slate-800 font-mono text-xs mt-1 font-semibold">Survey Plan #KB-2023-99</div>
+<div class="mt-2 text-sky-700 text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-sky-600">verified</span>
+                Co-Validated Spatial Seal
+              </div>
+</div>
+</div>
+<!-- Topology Validation Banner -->
+<div class="bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-base">task_alt</span>
+<span class="text-xs text-slate-700">Boundary parity confirmed: Ruiru River boundary aligns with legal gazette notice No. 112/1988 without contested perimeter offsets.</span>
+</div>
+<button class="px-3 py-1 rounded-md bg-white border border-slate-200 text-slate-700 hover:text-sky-700 hover:border-sky-300 text-xs font-semibold transition-colors whitespace-nowrap shadow-sm">
+              View Hash Audit
+            </button>
+</div>
+</div>
+</div>
+<!-- Right Catalog Stream & Real-time Federation Endpoints (5 cols) -->
+<div class="xl:col-span-5 flex flex-col gap-4">
+<!-- Shared National Map Layers Section Header (Updated Wording) -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-base font-bold text-slate-900">Shared National Map Layers</span>
+<span class="px-2 py-0.5 rounded-full bg-slate-200 font-mono text-xs text-slate-700 font-semibold">5 Priority</span>
+</div>
+<button class="text-xs text-sky-700 hover:text-sky-800 font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">refresh</span>
+            Re-index Mesh
+          </button>
+</div>
+<!-- Layer Catalog Cards Stack -->
+<div class="flex flex-col gap-3 overflow-y-auto max-h-[750px] pr-1">
+<!-- Card 1: Nairobi-Kiambu Boundary -->
+<div class="bg-white hover:bg-slate-50/70 p-4 rounded-xl transition-all border border-slate-200 shadow-sm flex flex-col gap-1 border-l-4 border-l-sky-600">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 font-mono text-[11px] font-semibold">POLY-MESH</span>
+<span class="text-xs font-bold text-slate-900">Nairobi-Kiambu Boundary Zone Spatial Harmonization</span>
+</div>
+<span class="text-xs text-slate-600 mt-1 leading-relaxed">Live inter-county buffer eliminating overlapping development approvals across county boundary.</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  LIVE SYNC
+                </span>
+<span class="text-[11px] text-slate-400 font-mono mt-0.5">2m ago</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 pt-2 border-t border-slate-100 text-xs text-slate-500">
+<span>Authority: <strong class="text-slate-800">NCC / Kiambu CoG</strong></span>
+<span>SRID: <strong class="text-slate-800 font-mono">EPSG:3857</strong></span>
+<span>Records: <strong class="text-slate-800 font-mono">14,290</strong></span>
+<button class="ml-auto text-sky-700 hover:text-sky-900 flex items-center gap-0.5 font-bold">
+                Inspect <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 2: KeNHA Trunk Network -->
+<div class="bg-white hover:bg-slate-50/70 p-4 rounded-xl transition-all border border-slate-200 shadow-sm flex flex-col gap-1 border-l-4 border-l-amber-500">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 font-mono text-[11px] font-semibold">LINE-STRING</span>
+<span class="text-xs font-bold text-slate-900">KeNHA National Trunk Road Network (Gazetted 2024)</span>
+</div>
+<span class="text-xs text-slate-600 mt-1 leading-relaxed">Full statutory vector corridor with 30m / 60m right-of-way easements mapped against registry deeds.</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                  VALIDATED
+                </span>
+<span class="text-[11px] text-slate-400 font-mono mt-0.5">14m ago</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 pt-2 border-t border-slate-100 text-xs text-slate-500">
+<span>Authority: <strong class="text-slate-800">KeNHA HQ Survey</strong></span>
+<span>Buffer: <strong class="text-slate-800 font-mono">60m Symmetrical</strong></span>
+<span>Corridor: <strong class="text-slate-800 font-mono">18,440 KM</strong></span>
+<button class="ml-auto text-amber-700 hover:text-amber-800 flex items-center gap-0.5 font-bold">
+                Inspect <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 3: NEMA Riparian & Wetland Envelopes -->
+<div class="bg-white hover:bg-slate-50/70 p-4 rounded-xl transition-all border border-slate-200 shadow-sm flex flex-col gap-1 border-l-4 border-l-teal-600">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-teal-100 text-teal-800 font-mono text-[11px] font-semibold">MULTIPOLYGON</span>
+<span class="text-xs font-bold text-slate-900">NEMA Nairobi River Riparian Reserve &amp; Wetland Envelopes</span>
+</div>
+<span class="text-xs text-slate-600 mt-1 leading-relaxed">30m statutory high-water mark buffer legally shielding active drainage and catchment basins.</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+                  LOCKED
+                </span>
+<span class="text-[11px] text-slate-400 font-mono mt-0.5">1h ago</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 pt-2 border-t border-slate-100 text-xs text-slate-500">
+<span>Authority: <strong class="text-slate-800">NEMA Envir. GIS</strong></span>
+<span>Status: <strong class="text-slate-800">Gazette Vol.CXXVI</strong></span>
+<span>Restricted: <strong class="text-slate-800 font-mono">100%</strong></span>
+<button class="ml-auto text-teal-700 hover:text-teal-800 flex items-center gap-0.5 font-bold">
+                Inspect <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 4: KURA Urban Rail & BRT Corridors -->
+<div class="bg-white hover:bg-slate-50/70 p-4 rounded-xl transition-all border border-slate-200 shadow-sm flex flex-col gap-1 border-l-4 border-l-indigo-600">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-800 font-mono text-[11px] font-semibold">NETWORK</span>
+<span class="text-xs font-bold text-slate-900">KURA Urban Commuter Rail &amp; BRT Corridors (Lines 1 to 5)</span>
+</div>
+<span class="text-xs text-slate-600 mt-1 leading-relaxed">Multi-modal public transit spatial envelopes under construction and expropriation freeze.</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
+                  SYNCED
+                </span>
+<span class="text-[11px] text-slate-400 font-mono mt-0.5">4h ago</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 pt-2 border-t border-slate-100 text-xs text-slate-500">
+<span>Authority: <strong class="text-slate-800">KURA / NaMATA</strong></span>
+<span>Lines: <strong class="text-slate-800">Green, Blue, Red</strong></span>
+<span>Stations: <strong class="text-slate-800 font-mono">48 Geocoded</strong></span>
+<button class="ml-auto text-indigo-700 hover:text-indigo-900 flex items-center gap-0.5 font-bold">
+                Inspect <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 5: County Physical Planning Amendments -->
+<div class="bg-white hover:bg-slate-50/70 p-4 rounded-xl transition-all border border-slate-200 shadow-sm flex flex-col gap-1 border-l-4 border-l-slate-400">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 font-mono text-[11px] font-semibold">SCHEMA-UPDATE</span>
+<span class="text-xs font-bold text-slate-900">County Physical Planning Amendments (Nakuru &amp; Machakos)</span>
+</div>
+<span class="text-xs text-slate-600 mt-1 leading-relaxed">Updated urban growth boundaries expanding industrial and high-density residential densities.</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 border border-slate-300 text-slate-700 text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                  PENDING SEAL
+                </span>
+<span class="text-[11px] text-slate-400 font-mono mt-0.5">Today</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 pt-2 border-t border-slate-100 text-xs text-slate-500">
+<span>Authority: <strong class="text-slate-800">Nakuru / Machakos Planning</strong></span>
+<span>Hectares: <strong class="text-slate-800 font-mono">82,410 HA</strong></span>
+<span>Parcels Affected: <strong class="text-slate-800 font-mono">3,190</strong></span>
+<button class="ml-auto text-slate-700 hover:text-slate-900 flex items-center gap-0.5 font-bold">
+                Inspect <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Agency Direct Data Connection (Updated Wording) -->
+<div class="w-full bg-white border border-slate-200 p-4 rounded-xl shadow-sm flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sky-700 text-lg">terminal</span>
+<span class="text-base font-bold text-slate-900">Agency Direct Data Connection</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-xs text-slate-700 font-mono font-medium">
+              RLS ENFORCED
+            </span>
+</div>
+<!-- Connection Tabs -->
+<div class="flex items-center gap-3 border-b border-slate-200 pb-2 pt-1 text-xs">
+<button class="text-sky-700 font-bold border-b-2 border-sky-600 pb-1">PostGIS RLS String</button>
+<button class="text-slate-600 hover:text-slate-900 pb-1 font-medium">OGC API Features / WFS</button>
+<button class="text-slate-600 hover:text-slate-900 pb-1 font-medium">WMS Tile Layer</button>
+<button class="text-slate-600 hover:text-slate-900 pb-1 font-medium">GeoJSON Direct</button>
+</div>
+<!-- Direct Connection Code Block with Tokenized Key -->
+<div class="relative bg-slate-900 p-3.5 rounded-lg font-mono text-xs text-slate-200 flex flex-col gap-1 overflow-x-auto shadow-inner">
+<div class="flex items-center justify-between text-slate-400 text-[11px] pb-1 border-b border-slate-800">
+<span># Agency Session: KeNHA-SURVEY-NODE-9 // Read-Only Spatial Mesh</span>
+<button class="text-sky-400 hover:text-sky-300 flex items-center gap-1 font-semibold" title="Copy String">
+<span class="material-symbols-outlined text-xs">content_copy</span>
+                Copy DSN
+              </button>
+</div>
+<div class="break-all pt-1 text-slate-300">
+<span class="text-amber-400">postgresql://</span><span class="text-sky-400">kenha_agent_94</span>:<span class="text-teal-400 font-bold">sec_tok_849f993d...</span>@<span class="text-white">mesh.sovereign.go.ke</span>:5432/<span class="text-amber-400">spatial_repository</span>?sslmode=verify-full&amp;options=--rls_agency_scope%3DCOUNTY_047
+            </div>
+</div>
+<!-- Export Buttons Matrix -->
+<div class="grid grid-cols-3 gap-2 mt-1">
+<button class="px-3 py-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm text-sky-700">download</span>
+              Export WFS 2.0 (GML)
+            </button>
+<button class="px-3 py-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm text-amber-600">data_object</span>
+              Stream GeoJSON
+            </button>
+<button class="px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm">key</span>
+              Rotate Access Token
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Inter-Agency Approvals & Updates (Updated Wording) -->
+<div class="w-full bg-white border border-slate-200 p-5 rounded-xl shadow-sm flex flex-col gap-3 mb-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-teal-700 text-lg">history_edu</span>
+<span class="text-base font-bold text-slate-900">Recent Inter-Agency Approvals &amp; Updates</span>
+</div>
+<span class="text-xs text-slate-500 font-mono">Synchronized across 8 National Data Nodes</span>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="bg-slate-50 border-y border-slate-200 text-slate-600 font-semibold uppercase tracking-wider text-[11px]">
+<th class="py-2.5 px-4">Timestamp</th>
+<th class="py-2.5 px-4">Publishing Agency</th>
+<th class="py-2.5 px-4">Layer Asset</th>
+<th class="py-2.5 px-4">Jurisdictional Delta</th>
+<th class="py-2.5 px-4">Topology Verdict</th>
+<th class="py-2.5 px-4">Consensus Hash</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-3 px-4 font-mono text-slate-500">13:42:01 EAT</td>
+<td class="py-3 px-4 text-slate-900 font-semibold">KeNHA Trunk Infrastructure</td>
+<td class="py-3 px-4 text-sky-700 font-medium">A104 Corridor Alignment (Nakuru Section)</td>
+<td class="py-3 px-4 font-mono text-teal-700">+12.4 km easement revised</td>
+<td class="py-3 px-4">
+<span class="px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold text-[11px]">
+                  ZERO SLIPPAGE
+                </span>
+</td>
+<td class="py-3 px-4 font-mono text-slate-500 text-[11px] truncate max-w-xs">0x7f99b24...8c3a</td>
+</tr>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-3 px-4 font-mono text-slate-500">13:18:44 EAT</td>
+<td class="py-3 px-4 text-slate-900 font-semibold">Nairobi City County Physical Planning</td>
+<td class="py-3 px-4 text-sky-700 font-medium">Kasarani Sub-County Master Zoning</td>
+<td class="py-3 px-4 font-mono text-amber-700">Bound to Kiambu Border Arc</td>
+<td class="py-3 px-4">
+<span class="px-2 py-0.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 font-semibold text-[11px]">
+                  ARBITRATED
+                </span>
+</td>
+<td class="py-3 px-4 font-mono text-slate-500 text-[11px] truncate max-w-xs">0x44ab019...22ef</td>
+</tr>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-3 px-4 font-mono text-slate-500">12:59:12 EAT</td>
+<td class="py-3 px-4 text-slate-900 font-semibold">NEMA Directorate of Enforcement</td>
+<td class="py-3 px-4 text-sky-700 font-medium">Ngong River Wetland Buffer Enclosure</td>
+<td class="py-3 px-4 font-mono text-teal-700">30m Buffer Enforced on 118 Parcels</td>
+<td class="py-3 px-4">
+<span class="px-2 py-0.5 rounded-full bg-purple-50 border border-purple-200 text-purple-700 font-semibold text-[11px]">
+                  RESTRICTION SEALED
+                </span>
+</td>
+<td class="py-3 px-4 font-mono text-slate-500 text-[11px] truncate max-w-xs">0x91d5ce3...a17b</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html><html class="light" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-variant": "#d3e4fe",
+          "surface-container": "#e5eeff",
+          "on-primary-container": "#fdfcff",
+          "secondary-fixed": "#89f5e7",
+          "surface-tint": "#006398",
+          "inverse-on-surface": "#eaf1ff",
+          "primary": "#006194",
+          "on-tertiary": "#ffffff",
+          "on-surface-variant": "#3f4850",
+          "surface-container-lowest": "#ffffff",
+          "on-tertiary-container": "#fffbff",
+          "surface-dim": "#cbdbf5",
+          "error-container": "#ffdad6",
+          "surface-container-low": "#eff4ff",
+          "tertiary-fixed-dim": "#ffb77d",
+          "on-secondary-fixed": "#00201d",
+          "outline-variant": "#bfc7d2",
+          "on-secondary-fixed-variant": "#005049",
+          "primary-fixed-dim": "#93ccff",
+          "on-tertiary-fixed-variant": "#6e3900",
+          "on-primary-fixed-variant": "#004b73",
+          "inverse-surface": "#213145",
+          "secondary-container": "#86f2e4",
+          "outline": "#707881",
+          "surface-container-high": "#dce9ff",
+          "secondary": "#006a61",
+          "on-tertiary-fixed": "#2f1500",
+          "tertiary-container": "#b15f00",
+          "on-secondary-container": "#006f66",
+          "on-background": "#0b1c30",
+          "on-error-container": "#93000a",
+          "inverse-primary": "#93ccff",
+          "surface-bright": "#f8f9ff",
+          "primary-fixed": "#cce5ff",
+          "on-error": "#ffffff",
+          "on-secondary": "#ffffff",
+          "secondary-fixed-dim": "#6bd8cb",
+          "on-primary-fixed": "#001d31",
+          "tertiary-fixed": "#ffdcc3",
+          "primary-container": "#007bb9",
+          "error": "#ba1a1a",
+          "on-primary": "#ffffff",
+          "tertiary": "#8d4b00",
+          "surface-container-highest": "#d3e4fe",
+          "surface": "#f8f9ff",
+          "on-surface": "#0b1c30",
+          "background": "#f8f9ff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-sm": "0.5rem",
+          "space-2xs": "0.125rem",
+          "margin-desktop": "1.5rem",
+          "margin": "1rem",
+          "space-2xl": "2rem",
+          "space-md": "0.75rem",
+          "gutter": "1rem",
+          "space-xs": "0.25rem",
+          "space-xl": "1.5rem",
+          "space-lg": "1rem",
+          "gutter-desktop": "1.5rem"
+        },
+        "fontFamily": {
+          "title-md": ["Public Sans"],
+          "headline-lg-mobile": ["Public Sans"],
+          "headline-sm": ["Public Sans"],
+          "headline-xl": ["Public Sans"],
+          "body-sm": ["Public Sans"],
+          "mono-coord": ["JetBrains Mono"],
+          "headline-lg": ["Public Sans"],
+          "label-md": ["Public Sans"],
+          "body-md": ["Public Sans"],
+          "headline-xl-mobile": ["Public Sans"],
+          "label-sm": ["Public Sans"],
+          "body-lg": ["Public Sans"],
+          "mono-data": ["JetBrains Mono"]
+        }
+      }
+    }
+  }
+</script></head><body class="bg-slate-50 font-body-md text-slate-800 antialiased selection:bg-sky-100 selection:text-sky-900"><header class="fixed top-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md z-50 border-b border-slate-200 shadow-sm"><div class="w-full h-full px-6 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-0"><img alt="Sovereign Spatial Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WAZF9CfCUrKfK6UV4WV47BYGkPtuVOw1V2elUro0o5VFeU2a6pMCBDu4iXtm2VUUnVuoNECOsSnNB5lNJcumXaJ4Kpgn-CqqgjMx-M3CJYfBdej61tUQ61nZsgdPlgiYDOGw0UV2-ZpcOpUaJve_Ljlpe-ADIWsts6QupfZT0RnydmEQFXm29qU5HnkoDGroRljTWCC6gDQQ2T2h_X4R1UtHHkf52sTmHQwhJ91Guwzw"><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-bold text-slate-900 tracking-tight uppercase truncate text-sm">Sovereign Spatial</span><span class="font-semibold text-xs px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 uppercase tracking-wide">KE-MESH</span></div><span class="text-xs text-slate-500 truncate hidden sm:inline">Republic of Kenya National GIS Data Mesh</span></div></div><div class="hidden xl:flex items-center gap-space-md bg-slate-100/80 border border-slate-200 px-3.5 py-1.5 rounded-lg"><div class="flex items-center gap-space-xs"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span></span><span class="text-xs font-semibold text-emerald-800 uppercase tracking-wide">PostGIS Node 01: Synced</span></div><div class="h-3 w-px bg-slate-300"></div><div class="flex items-center gap-space-xs text-slate-600"><span class="material-symbols-outlined text-sm text-sky-700">radar</span><span class="text-xs font-medium">EPSG:3857 | Arc 1960 (UTM 37S)</span></div><div class="h-3 w-px bg-slate-300"></div><div class="text-xs text-slate-600 font-mono">1°17'34.2"S 36°49'17.8"E</div></div><div class="flex items-center gap-space-md"><div class="relative hidden md:flex items-center bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-lg"><span class="material-symbols-outlined text-sm text-slate-500 mr-1.5">account_balance</span><select class="bg-transparent text-xs font-semibold text-slate-800 focus:outline-none cursor-pointer pr-4"><option class="bg-white text-slate-800" value="kenha">KeNHA - National Highways</option><option class="bg-white text-slate-800" value="ncc">Nairobi City County</option><option class="bg-white text-slate-800" value="kura">KURA - Urban Roads</option><option class="bg-white text-slate-800" value="kerra">KeRRA - Rural Roads</option><option class="bg-white text-slate-800" value="mol">Ministry of Lands &amp; Physical Planning</option><option class="bg-white text-slate-800" value="uon">Academic Portal - UoN / JKUAT</option></select></div><button class="relative p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 border border-slate-200 transition-colors"><span class="material-symbols-outlined text-base">notifications</span><span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-amber-500 rounded-full"></span></button><div class="flex items-center gap-2 pl-1 border-l border-slate-200"><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbrSloEGRcCW0XpHVnD4R0wt3Dg7gFgsP8pSQ_J0G9RYCnZzsrZMHNw6jn1SW0_KyuQaiFy9do3a0fSlxxrdG0djNWUyxdJfLZmYS-VxsE9NahsA363oH49Y-WircKrMx0PhBqK9OnQ0CWJmYRZJkNyimWA37-CRCIby6dyMxanh85wtxFl_PhG6hNGZv-ooaw8kRBebu-DHn9GXoSbPtcQFQlkDEWg7ZAIyBxj137"><div class="hidden 2xl:flex flex-col text-left"><span class="text-xs font-semibold text-slate-900 leading-tight">Eng. K. Kiprop</span><span class="text-[11px] text-slate-500 leading-tight">Chief Cadastral Surveyor</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-white border-r border-slate-200 z-40 flex flex-col justify-between shadow-sm"><div class="flex flex-col flex-1 overflow-y-auto px-4 py-6"><div class="px-3 mb-2"><span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Spatial Mesh Governance</span></div><nav class="flex flex-col gap-1" data-active-classes="bg-sky-50 text-sky-800 font-semibold rounded-lg border border-sky-200/80"><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium text-xs" data-path="dashboard-and-mesh" href="#"><span class="material-symbols-outlined text-lg text-slate-500">dashboard</span><span class="">Dashboard &amp; Mesh</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium text-xs" data-path="encroachment-and-subdivision" href="#"><span class="material-symbols-outlined text-lg text-slate-500">polyline</span><span class="">Encroachment &amp; Subdivision</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium text-xs" data-path="ai-multimodal-extraction" href="#"><span class="material-symbols-outlined text-lg text-slate-500">document_scanner</span><span class="">AI Multimodal Extraction</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium text-xs" data-path="g2g-spatial-repository" href="#"><span class="material-symbols-outlined text-lg text-slate-500">share_location</span><span class="">G2G Spatial Repository</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-sky-50 text-sky-800 font-semibold border border-sky-200/80 transition-all text-xs" data-path="academic-and-research" href="#"><span class="material-symbols-outlined text-lg text-sky-700">school</span><span class="">Academic &amp; Research</span></a></nav><div class="mt-6 px-3 mb-2"><span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Security Infrastructure</span></div><nav class="flex flex-col gap-1"><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all font-medium text-xs" data-path="authentication-and-rls" href="#"><span class="material-symbols-outlined text-lg text-slate-500">security</span><span class="">Authentication &amp; RLS</span></a></nav></div><div class="p-3.5 bg-slate-50 border border-slate-200 m-3 rounded-lg flex flex-col gap-1"><div class="flex items-center justify-between"><span class="text-[11px] font-medium text-slate-500">Sovereign Ledger</span><span class="text-[11px] font-bold text-sky-700 uppercase">v3.8-G2G</span></div><div class="text-xs text-slate-600 font-mono truncate">Node: KE-NRB-POSTGIS-09</div><div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden mt-1"><div class="bg-sky-600 h-full w-5/6"></div></div></div></aside><div class="pl-72"><main class="relative w-full pt-16 min-h-screen bg-slate-50"><div class="flex flex-col w-full">
+<!-- Top Academic Credentials Bar & Live Node Status -->
+<div class="w-full bg-white border-b border-slate-200 px-6 py-2.5 flex flex-wrap items-center justify-between gap-space-md shadow-[0_1px_2px_rgba(0,0,0,0.03)]"><div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200"><span class="material-symbols-outlined text-sm text-sky-700">school</span><span class="text-xs font-semibold">JKUAT Geospatial Portal</span></div><div class="h-3 w-px bg-slate-300 hidden sm:block"></div><div class="flex items-center gap-1.5 text-slate-800 text-xs"><span class="font-semibold text-slate-900">Jomo Kenyatta University of Agriculture and Technology</span><span class="text-slate-500 hidden md:inline">• School of Geomatic Engineering &amp; GIS</span></div></div><div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-medium"><span class="material-symbols-outlined text-sm text-emerald-600">verified</span><span class="">Student &amp; Researcher Access • Free &amp; Uncapped</span></div></div></div>
+<div class="px-6 py-6 flex flex-col gap-6 max-w-[1600px] w-full mx-auto">
+<!-- Header Hero: Institutional Academic Commons -->
+<div class="relative w-full rounded-xl bg-white p-6 md:p-8 border border-slate-200 shadow-sm overflow-hidden"><div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-sky-100/60 blur-3xl pointer-events-none"></div><div class="relative z-10 flex flex-col xl:flex-row xl:items-center justify-between gap-6"><div class="max-w-3xl flex flex-col gap-3"><div class="inline-flex items-center gap-2"><span class="material-symbols-outlined text-sky-700 text-lg">account_balance</span><span class="text-xs font-bold text-sky-800 uppercase tracking-wider">National Academic Spatial Commons</span></div><h1 class="text-2xl md:text-3xl text-slate-900 font-bold tracking-tight leading-tight">Open GIS Datasets for Kenyan Universities &amp; Research Institutes</h1><p class="text-slate-600 text-sm md:text-base leading-relaxed">Democratizing spatial infrastructure for undergraduate study, academic dissertations, and postgraduate research. Access sanitized, high-precision national maps protected by privacy-preserving anonymization.</p><div class="flex flex-wrap items-center gap-3 pt-2"><div class="inline-flex items-center gap-1.5 text-xs text-slate-700 font-medium"><span class="material-symbols-outlined text-base text-emerald-600">check_circle</span><span class="">Sponsored by KENET</span></div><div class="inline-flex items-center gap-1.5 text-xs text-slate-700 font-medium"><span class="material-symbols-outlined text-base text-sky-600">check_circle</span><span class="">Zero Bandwidth Charges</span></div><div class="inline-flex items-center gap-1.5 text-xs text-slate-700 font-medium"><span class="material-symbols-outlined text-base text-sky-600">check_circle</span><span class="">Updated Daily</span></div></div></div><div class="flex flex-col gap-3 bg-slate-50 border border-slate-200 p-5 rounded-xl shadow-xs min-w-[260px]"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Access Quota</span><span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-xs border border-emerald-200">Active</span></div><div class="flex items-baseline gap-2"><span class="text-2xl font-bold text-slate-900">Unlimited</span><span class="text-xs text-slate-500">Read-Only</span></div><p class="text-xs text-slate-500 leading-normal">Full access to all sanitized national cadastral and thematic layers.</p></div></div></div>
+<!-- Privacy Sanitization & Governance Overview Banner -->
+<div class="w-full bg-slate-100/90 border border-slate-200 p-5 md:p-6 rounded-xl flex flex-col lg:flex-row items-stretch gap-5"><div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4"><div class="flex items-start gap-3.5 p-5 bg-white rounded-lg border border-slate-200 shadow-xs"><div class="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-700 shrink-0"><span class="material-symbols-outlined text-xl">verified_user</span></div><div class="flex flex-col gap-1"><h4 class="text-sm font-bold text-slate-900">Automatic Privacy Guard</h4><p class="text-xs text-slate-600 leading-relaxed">Proprietor national IDs, personal deed names, and tax numbers are anonymized in compliance with the Kenya Data Protection Act 2019.</p></div></div><div class="flex items-start gap-3.5 p-5 bg-white rounded-lg border border-slate-200 shadow-xs"><div class="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-700 shrink-0"><span class="material-symbols-outlined text-xl">polyline</span></div><div class="flex flex-col gap-1"><h4 class="text-sm font-bold text-slate-900">Cadastral Boundary Accuracy</h4><p class="text-xs text-slate-600 leading-relaxed">Parcel boundaries, vertex coordinates, areas, and topology retain 100% geometric fidelity in standard Arc 1960 and UTM projections.</p></div></div><div class="flex items-start gap-3.5 p-5 bg-white rounded-lg border border-slate-200 shadow-xs"><div class="w-10 h-10 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-800 shrink-0"><span class="material-symbols-outlined text-xl">bolt</span></div><div class="flex flex-col gap-1"><h4 class="text-sm font-bold text-slate-900">Instant Academic Downloads</h4><p class="text-xs text-slate-600 leading-relaxed">Download ready-to-use GIS packages (.gpkg, Shapefile, GeoParquet) or query dynamically via Python notebooks and QGIS plugins.</p></div></div></div></div>
+<!-- Section: Curated Academic Research Layer Repositories -->
+<div class="flex flex-col gap-4">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+<div>
+<span class="text-xs font-bold text-sky-800 uppercase tracking-wider">Verified Repositories</span>
+<h2 class="text-xl font-bold text-slate-900">Available Maps &amp; Research Datasets</h2>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-500 font-medium">Filter by Department:</span>
+<select class="bg-white border border-slate-300 text-xs font-semibold text-slate-800 px-3 py-1.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer shadow-xs" id="repoFilter">
+<option value="all">All Disciplines</option>
+<option value="urban">Urban Planning &amp; Settlement Studies</option>
+<option value="climate">Climate &amp; Agro-Ecology</option>
+<option value="transport">Infrastructure &amp; Mobility</option>
+</select>
+</div>
+</div>
+<!-- Repositories Grid (4 bespoke cards) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5"><div class="flex flex-col justify-between bg-white border border-slate-200 rounded-xl p-6 hover:border-sky-300 hover:shadow-md transition-all group"><div class="flex flex-col gap-3"><div class="flex items-start justify-between gap-4"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-800 shrink-0"><span class="material-symbols-outlined text-xl">thermostat</span></div><div><span class="text-xs font-semibold text-slate-500">Time Series • 1990–2024</span><h3 class="text-base text-slate-900 font-bold group-hover:text-sky-700 transition-colors">Land Cover &amp; Urban Heat Island Series</h3></div></div><span class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-mono text-xs font-semibold shrink-0">14.2 GB</span></div><p class="text-xs md:text-sm text-slate-600 leading-relaxed">Landsat and Sentinel-derived surface temperature vectors fused with 30m LULC classifications across 47 Kenyan counties.</p><div class="flex items-center gap-2 text-xs text-slate-500"><span class="font-medium text-slate-700">1,248,320 features</span><span class="">•</span><span class="">MultiPolygon</span><span class="">•</span><span class="text-emerald-700 font-medium">Open Academic License</span></div></div><div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-100"><button class="text-xs font-semibold text-sky-700 hover:text-sky-900 hover:underline flex items-center gap-1" onclick="insertQuery('SELECT period_year, avg_lst_celsius, geom FROM national_uhi_timeseries WHERE county_name = \'Nairobi\' LIMIT 50;')"><span class="material-symbols-outlined text-base">terminal</span> Query in Sandbox</button><div class="flex items-center gap-2"><button class="px-3 py-1.5 rounded-lg bg-sky-700 hover:bg-sky-800 text-white text-xs font-semibold transition-all flex items-center gap-1 shadow-xs" onclick="showDownloadToast('UHI Vector Series (GPKG)')"><span class="material-symbols-outlined text-sm">download</span> GeoPackage</button><button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 text-xs font-medium transition-all" onclick="showDownloadToast('UHI Vector Series (GeoParquet)')">GeoParquet</button></div></div></div><div class="flex flex-col justify-between bg-white border border-slate-200 rounded-xl p-6 hover:border-sky-300 hover:shadow-md transition-all group"><div class="flex flex-col gap-3"><div class="flex items-start justify-between gap-4"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-700 shrink-0"><span class="material-symbols-outlined text-xl">holiday_village</span></div><div><span class="text-xs font-semibold text-slate-500">Cadastral Morphometrics</span><h3 class="text-base text-slate-900 font-bold group-hover:text-sky-700 transition-colors">Informal Settlement Cadastral Morphology</h3></div></div><span class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-mono text-xs font-semibold shrink-0">3.8 GB</span></div><p class="text-xs md:text-sm text-slate-600 leading-relaxed">Anonymized rooftop outlines, water kiosks, and pedestrian corridors across Mukuru, Kibera, and Mathare settlements.</p><div class="flex items-center gap-2 text-xs text-slate-500"><span class="font-medium text-slate-700">482,900 footprints</span><span class="">•</span><span class="">Arc 1960</span><span class="">•</span><span class="text-emerald-700 font-medium">Anonymized IDs</span></div></div><div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-100"><button class="text-xs font-semibold text-sky-700 hover:text-sky-900 hover:underline flex items-center gap-1" onclick="insertQuery('SELECT settlement_zone, building_sqm, st_perimeter(geom) FROM informal_morphology WHERE settlement_zone = \'Kibera_Soweto\' LIMIT 50;')"><span class="material-symbols-outlined text-base">terminal</span> Query in Sandbox</button><div class="flex items-center gap-2"><button class="px-3 py-1.5 rounded-lg bg-sky-700 hover:bg-sky-800 text-white text-xs font-semibold transition-all flex items-center gap-1 shadow-xs" onclick="showDownloadToast('Informal Morphology (GPKG)')"><span class="material-symbols-outlined text-sm">download</span> GeoPackage</button><button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 text-xs font-medium transition-all" onclick="showDownloadToast('Informal Morphology (Shapefile)')">Shapefile (.zip)</button></div></div></div><div class="flex flex-col justify-between bg-white border border-slate-200 rounded-xl p-6 hover:border-sky-300 hover:shadow-md transition-all group"><div class="flex flex-col gap-3"><div class="flex items-start justify-between gap-4"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-700 shrink-0"><span class="material-symbols-outlined text-xl">commute</span></div><div><span class="text-xs font-semibold text-slate-500">Infrastructure &amp; Mobility</span><h3 class="text-base text-slate-900 font-bold group-hover:text-sky-700 transition-colors">Transportation Networks &amp; Commute Grids</h3></div></div><span class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-mono text-xs font-semibold shrink-0">8.7 GB</span></div><p class="text-xs md:text-sm text-slate-600 leading-relaxed">Nairobi Metropolitan Area multimodal road graph (KeNHA / KURA / Matatu routes) with accessibility isochrones.</p><div class="flex items-center gap-2 text-xs text-slate-500"><span class="font-medium text-slate-700">62,400 segments</span><span class="">•</span><span class="">Network Graph</span><span class="">•</span><span class="text-emerald-700 font-medium">pgRouting Ready</span></div></div><div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-100"><button class="text-xs font-semibold text-sky-700 hover:text-sky-900 hover:underline flex items-center gap-1" onclick="insertQuery('SELECT source, target, cost, cost_s_peak, geom FROM nma_multimodal_edges WHERE road_class IN (\'Class A\', \'Class B\') LIMIT 50;')"><span class="material-symbols-outlined text-base">terminal</span> Query in Sandbox</button><div class="flex items-center gap-2"><button class="px-3 py-1.5 rounded-lg bg-sky-700 hover:bg-sky-800 text-white text-xs font-semibold transition-all flex items-center gap-1 shadow-xs" onclick="showDownloadToast('Transportation Network Topology (GPKG)')"><span class="material-symbols-outlined text-sm">download</span> GeoPackage</button><button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 text-xs font-medium transition-all" onclick="showDownloadToast('Transportation Network Topology (GeoParquet)')">GeoParquet</button></div></div></div><div class="flex flex-col justify-between bg-white border border-slate-200 rounded-xl p-6 hover:border-sky-300 hover:shadow-md transition-all group"><div class="flex flex-col gap-3"><div class="flex items-start justify-between gap-4"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-800 shrink-0"><span class="material-symbols-outlined text-xl">agriculture</span></div><div><span class="text-xs font-semibold text-slate-500">Ecosystems &amp; Agronomy</span><h3 class="text-base text-slate-900 font-bold group-hover:text-sky-700 transition-colors">County Agro-Ecological Zones &amp; Climate Data</h3></div></div><span class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-mono text-xs font-semibold shrink-0">6.4 GB</span></div><p class="text-xs md:text-sm text-slate-600 leading-relaxed">Standardized AEZ boundaries (Zone I–VII) combined with drought frequency indices and pastoral migration corridors.</p><div class="flex items-center gap-2 text-xs text-slate-500"><span class="font-medium text-slate-700">47 Counties</span><span class="">•</span><span class="">Polygon &amp; Raster</span><span class="">•</span><span class="text-emerald-700 font-medium">KALRO Calibrated</span></div></div><div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-100"><button class="text-xs font-semibold text-sky-700 hover:text-sky-900 hover:underline flex items-center gap-1" onclick="insertQuery('SELECT county_name, aez_class, drought_risk_index, geom FROM national_agro_ecological_zones WHERE drought_risk_index &gt; 0.75;')"><span class="material-symbols-outlined text-base">terminal</span> Query in Sandbox</button><div class="flex items-center gap-2"><button class="px-3 py-1.5 rounded-lg bg-sky-700 hover:bg-sky-800 text-white text-xs font-semibold transition-all flex items-center gap-1 shadow-xs" onclick="showDownloadToast('Agro-Ecological Zones (COG)')"><span class="material-symbols-outlined text-sm">download</span> Cloud GeoTIFF</button><button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 text-xs font-medium transition-all" onclick="showDownloadToast('Agro-Ecological Zones (GPKG)')">GeoPackage</button></div></div></div></div>
+</div>
+<!-- Live PostGIS Query Sandbox & Academic Workbench -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-6"><div class="xl:col-span-7 flex flex-col gap-4 bg-white p-6 rounded-xl border border-slate-200 shadow-sm"><div class="flex flex-wrap items-center justify-between gap-3"><div><h3 class="text-base font-bold text-slate-900">Interactive Spatial Query Sandbox</h3><p class="text-xs text-slate-500">Test spatial queries directly in your browser without local database setup</p></div><div class="flex items-center gap-2"><button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-semibold transition-colors" onclick="resetQuery()">Reset</button><button class="px-4 py-1.5 rounded-lg bg-sky-700 hover:bg-sky-800 text-white text-xs font-semibold transition-all flex items-center gap-1.5 shadow-xs" id="runQueryBtn" onclick="executeAcademicQuery()"><span class="material-symbols-outlined text-sm">play_arrow</span> Run Query</button></div></div><div class="flex flex-col rounded-lg border border-slate-200 bg-slate-900 overflow-hidden shadow-xs"><div class="flex items-center justify-between px-4 py-2 bg-slate-950 text-slate-400 text-xs font-mono border-b border-slate-800"><span class="">query_sandbox.sql</span><span class="text-slate-500">Auto-limit: 10 rows</span></div><div class="p-4"><textarea class="w-full bg-transparent text-sky-200 focus:outline-none resize-none font-mono text-xs leading-relaxed" id="sqlQueryInput" rows="4">SELECT parcel_anonymized_id, ST_Area(geom) / 10000.0 AS area_hectares, land_use_sanitized, county_zone
+FROM academic_sanitized_cadastre 
+WHERE county_zone = 'Nairobi_West'
+ORDER BY area_hectares DESC 
+LIMIT 4;</textarea></div></div><div class="flex flex-col gap-2"><div class="flex items-center justify-between text-slate-500 text-xs px-1"><span id="queryTelemetry" class="">4 Results Returned • Execution: 18.4ms</span><button class="text-sky-700 hover:text-sky-900 font-medium" onclick="showDownloadToast('Query Results (GeoJSON)')">Export as GeoJSON</button></div><div class="w-full overflow-x-auto rounded-lg border border-slate-200 bg-white"><table class="w-full text-left text-xs"><thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200"><tr><th class="py-2.5 px-3">Parcel ID</th><th class="py-2.5 px-3">Area (ha)</th><th class="py-2.5 px-3">Land Use</th><th class="py-2.5 px-3">Zone</th></tr></thead><tbody class="divide-y divide-slate-100 text-slate-700" id="queryResultsBody"><tr class="hover:bg-slate-50 transition-colors"><td class="py-2 px-3 font-mono font-medium text-sky-800">NRB-PKG-7712-X</td><td class="py-2 px-3">4.18 ha</td><td class="py-2 px-3"><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-800 font-medium text-[11px]">Institutional</span></td><td class="py-2 px-3">Nairobi West</td></tr><tr class="hover:bg-slate-50 transition-colors"><td class="py-2 px-3 font-mono font-medium text-sky-800">NRB-PKG-7713-A</td><td class="py-2 px-3">2.91 ha</td><td class="py-2 px-3"><span class="px-2 py-0.5 rounded bg-amber-50 text-amber-800 font-medium text-[11px]">Educational</span></td><td class="py-2 px-3">Nairobi West</td></tr><tr class="hover:bg-slate-50 transition-colors"><td class="py-2 px-3 font-mono font-medium text-sky-800">NRB-PKG-7714-C</td><td class="py-2 px-3">1.84 ha</td><td class="py-2 px-3"><span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 font-medium text-[11px]">Public Open Space</span></td><td class="py-2 px-3">Nairobi West</td></tr><tr class="hover:bg-slate-50 transition-colors"><td class="py-2 px-3 font-mono font-medium text-sky-800">NRB-PKG-7715-F</td><td class="py-2 px-3">0.62 ha</td><td class="py-2 px-3"><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-800 font-medium text-[11px]">Commercial</span></td><td class="py-2 px-3">Nairobi West</td></tr></tbody></table></div></div></div><div class="xl:col-span-5 flex flex-col gap-5"><div class="flex flex-col bg-white border border-slate-200 p-6 rounded-xl shadow-sm"><div class="flex items-center justify-between mb-2"><h3 class="text-base font-bold text-slate-900">Connect via Python &amp; QGIS</h3><span class="text-xs text-emerald-700 font-semibold">Free Student Access</span></div><p class="text-xs text-slate-500 mb-3">Import datasets directly into your Jupyter Notebook, Google Colab, or desktop GIS.</p><div class="flex items-center gap-1 bg-slate-100 border border-slate-200 p-1 rounded-lg mb-3"><button class="flex-1 py-1.5 text-center text-xs font-semibold rounded bg-white text-sky-900 shadow-xs border border-slate-200 transition-all" id="tabPython" onclick="switchSnippet('python')">Python (GeoPandas)</button><button class="flex-1 py-1.5 text-center text-xs font-medium rounded text-slate-600 hover:text-slate-900 transition-all" id="tabQgis" onclick="switchSnippet('qgis')">QGIS</button><button class="flex-1 py-1.5 text-center text-xs font-medium rounded text-slate-600 hover:text-slate-900 transition-all" id="tabArcgis" onclick="switchSnippet('arcgis')">ArcGIS REST</button></div><div class="relative bg-slate-900 rounded-lg p-4 overflow-x-auto border border-slate-800"><button class="absolute top-2.5 right-2.5 p-1.5 rounded bg-slate-800 text-slate-300 hover:text-white transition-colors" onclick="copySnippetToClipboard()" title="Copy code"><span class="material-symbols-outlined text-sm" id="copyIcon">content_copy</span></button><pre class="font-mono text-xs text-sky-200 whitespace-pre overflow-x-auto leading-relaxed" id="snippetCode">import geopandas as gpd
+
+# Load national research layer directly into GeoDataFrame
+URL = "https://mesh.spatial.go.ke/data/academic/nairobi_parcels.gpkg"
+gdf = gpd.read_file(URL)
+
+print(f"Loaded {len(gdf)} sanitized parcels for research.")
+gdf.plot(column="land_use_sanitized", legend=True)</pre></div><div class="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 text-xs text-slate-500"><span class="">EduID Single Sign-On Enabled</span><span class="text-sky-700 font-medium">TLS Encrypted</span></div></div><div class="bg-white border border-slate-200 p-5 rounded-xl shadow-sm flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-700"><span class="material-symbols-outlined text-lg">school</span></div><div><h4 class="text-xs font-bold text-slate-900">Conducting a Thesis or Dissertation?</h4><p class="text-xs text-slate-500">Request specialized compute or high-density survey data</p></div></div><button class="px-3.5 py-1.5 rounded-lg bg-sky-700 hover:bg-sky-800 text-white text-xs font-semibold transition-all shrink-0" onclick="showDownloadToast('Grant Application Form')">Apply</button></div></div></div>
+<!-- Active Research Grants & University Co-Lab Spotlight -->
+<div class="w-full bg-white border border-slate-200 rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm mb-8">
+<div class="flex flex-col gap-1.5 max-w-2xl">
+<div class="flex items-center gap-2 text-sky-700">
+<span class="material-symbols-outlined text-base">hub</span>
+<span class="text-xs font-bold uppercase tracking-wider">Inter-University GIS Research Federation</span>
+</div>
+<h3 class="text-base md:text-lg font-bold text-slate-900">
+          Conducting a Graduate Dissertation on Spatial Dynamics?
+        </h3>
+<p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+          Submit your research abstract to request elevated spatial sampling rates, raw sub-meter elevation models (DEM), or compute grants on the Kenya National Spatial Data Infrastructure (KNSDI) PostGIS cluster.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 text-xs font-semibold transition-all flex items-center gap-2 shadow-xs" onclick="showDownloadToast('Research abstract submission form')">
+<span class="material-symbols-outlined text-base">edit_note</span> Submit Abstract
+        </button>
+<button class="px-5 py-2.5 rounded-lg bg-sky-700 hover:bg-sky-800 text-white text-xs font-semibold transition-all flex items-center gap-2 shadow-xs" onclick="showDownloadToast('PostGIS Academic API documentation')">
+<span class="material-symbols-outlined text-base">menu_book</span> API Reference Guide
+        </button>
+</div>
+</div>
+</div>
+<!-- Notification Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-white border border-slate-200 px-4 py-3 rounded-lg shadow-xl" id="toastNotification">
+<span class="material-symbols-outlined text-emerald-600 text-xl">check_circle</span>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-900" id="toastTitle">Action Completed</span>
+<span class="text-xs text-slate-600" id="toastDesc">Academic data stream active.</span>
+</div>
+</div>
+</div>
+<script>
+  // Snippet dictionary
+  const snippets = {
+    python: `import geopandas as gpd
+from sqlalchemy import create_engine
+
+# Sovereign Spatial Academic Mesh URI
+DB_URI = (
+    "postgresql://academic_student:jkuat_mesh_token@"
+    "mesh.spatial.go.ke:5432/kenya_spatial_commons"
+)
+engine = create_engine(DB_URI)
+
+sql = """
+SELECT parcel_anonymized_id, geom, land_use_sanitized 
+FROM academic_sanitized_cadastre 
+WHERE county_zone = 'Nairobi_West';
+"""
+
+# Read directly into GeoDataFrame (Arc 1960)
+gdf = gpd.read_postgis(sql, engine, geom_col="geom")
+print(f"Loaded {len(gdf)} sanitized research parcels.")
+gdf.plot(column="land_use_sanitized", legend=True)`,
+
+    qgis: `/* QGIS 3.x Spatial Vector Layer Connection */
+Name: Kenya Academic Commons (Sanitized)
+Service / Host: mesh.spatial.go.ke
+Port: 5432
+Database: kenya_spatial_commons
+SSL Mode: require
+Schema: academic_sanitized
+Tables: 
+  - national_uhi_timeseries
+  - informal_morphology
+  - nma_multimodal_edges
+  - national_agro_ecological_zones
+Auth: EduID PKI Token / Token Auth (JKUAT-GEGIS-2025-X89)`,
+
+    arcgis: `// ArcGIS REST API Feature Service Endpoint
+GET https://mesh.spatial.go.ke/server/rest/services/AcademicCommons/FeatureServer/0/query
+Headers:
+  Authorization: Bearer JKUAT-GEGIS-2025-X89
+Params:
+  where: county_zone = 'Nairobi_West'
+  outFields: parcel_anonymized_id,land_use_sanitized,area_hectares
+  f: pgeojson
+  returnGeometry: true
+  spatialRel: esriSpatialRelIntersects`
+  };
+
+  function switchSnippet(type) {
+    const tabs = ['python', 'qgis', 'arcgis'];
+    tabs.forEach(t => {
+      const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+      if (t === type) {
+        btn.className = "flex-1 py-1.5 text-center text-xs font-semibold rounded bg-white text-sky-900 shadow-xs border border-slate-200 transition-all";
+      } else {
+        btn.className = "flex-1 py-1.5 text-center text-xs font-medium rounded text-slate-600 hover:text-slate-900 transition-all";
+      }
+    });
+
+    document.getElementById('snippetCode').textContent = snippets[type];
+  }
+
+  function copySnippetToClipboard() {
+    const code = document.getElementById('snippetCode').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      const icon = document.getElementById('copyIcon');
+      icon.textContent = 'check';
+      showToast('Copied to Clipboard', 'Connection string ready for analysis environment.');
+      setTimeout(() => { icon.textContent = 'content_copy'; }, 2000);
+    });
+  }
+
+  function insertQuery(sql) {
+    document.getElementById('sqlQueryInput').value = sql;
+    document.getElementById('sqlQueryInput').focus();
+    showToast('Sandbox Updated', 'Custom spatial query loaded. Click Execute.');
+  }
+
+  function resetQuery() {
+    document.getElementById('sqlQueryInput').value = `SELECT 
+    parcel_anonymized_id,
+    ST_Area(ST_Transform(geom, 21097)) / 10000.0 AS area_hectares,
+    ST_AsGeoJSON(ST_Centroid(geom)) AS centroid_geojson,
+    land_use_sanitized,
+    county_zone
+FROM academic_sanitized_cadastre 
+WHERE county_zone = 'Nairobi_West' 
+  AND ST_Area(ST_Transform(geom, 21097)) > 1500
+ORDER BY area_hectares DESC 
+LIMIT 4;`;
+    executeAcademicQuery();
+  }
+
+  function executeAcademicQuery() {
+    const btn = document.getElementById('runQueryBtn');
+    btn.innerHTML = `<span class="material-symbols-outlined text-sm animate-spin">refresh</span> Executing...`;
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = `<span class="material-symbols-outlined text-sm">play_arrow</span> Execute Spatial Query`;
+      btn.disabled = false;
+
+      const latency = (Math.random() * (22.5 - 11.2) + 11.2).toFixed(1);
+      document.getElementById('queryTelemetry').textContent = `Query Completed • 4 Rows Returned • Latency: ${latency}ms • Spatial Filter: Arc 1960`;
+      showToast('Query Executed', `Returned 4 sanitized features in ${latency}ms.`);
+    }, 450);
+  }
+
+  function showDownloadToast(layerName) {
+    showToast('Download Queued', `Preparing sanitized export: ${layerName}`);
+  }
+
+  function showToast(title, desc) {
+    const toast = document.getElementById('toastNotification');
+    document.getElementById('toastTitle').textContent = title;
+    document.getElementById('toastDesc').textContent = desc;
+    toast.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3200);
+  }
+</script></main></div>
+
+</body></html>

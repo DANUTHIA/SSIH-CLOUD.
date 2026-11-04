@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_dashboard" name="shell-type"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-variant": "#d3e4fe",
+            "surface-container": "#f1f5f9",
+            "on-primary-container": "#fdfcff",
+            "secondary-fixed": "#89f5e7",
+            "surface-tint": "#006398",
+            "inverse-on-surface": "#eaf1ff",
+            "primary": "#006194",
+            "on-tertiary": "#ffffff",
+            "on-surface-variant": "#475569",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#fffbff",
+            "surface-dim": "#e2e8f0",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#f8fafc",
+            "tertiary-fixed-dim": "#ffb77d",
+            "on-secondary-fixed": "#00201d",
+            "outline-variant": "#e2e8f0",
+            "on-secondary-fixed-variant": "#005049",
+            "primary-fixed-dim": "#93ccff",
+            "on-tertiary-fixed-variant": "#6e3900",
+            "on-primary-fixed-variant": "#004b73",
+            "inverse-surface": "#213145",
+            "secondary-container": "#ccfbf1",
+            "outline": "#94a3b8",
+            "surface-container-high": "#e2e8f0",
+            "secondary": "#0d9488",
+            "on-tertiary-fixed": "#2f1500",
+            "tertiary-container": "#fef3c7",
+            "on-secondary-container": "#0f766e",
+            "on-background": "#0f172a",
+            "on-error-container": "#93000a",
+            "inverse-primary": "#93ccff",
+            "surface-bright": "#ffffff",
+            "primary-fixed": "#cce5ff",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "secondary-fixed-dim": "#6bd8cb",
+            "on-primary-fixed": "#001d31",
+            "tertiary-fixed": "#ffdcc3",
+            "primary-container": "#007bb9",
+            "error": "#ba1a1a",
+            "on-primary": "#ffffff",
+            "tertiary": "#d97706",
+            "surface-container-highest": "#cbd5e1",
+            "surface": "#ffffff",
+            "on-surface": "#0f172a",
+            "background": "#f8fafc"
+          },
+          fontFamily: {
+            sans: ["Public Sans", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-background font-sans text-on-surface antialiased text-[13px] leading-[18px]">
+<!-- Top Navigation Header -->
+<header class="fixed top-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md z-50 border-b border-outline-variant shadow-sm">
+<div class="w-full h-full px-6 flex items-center justify-between gap-4">
+<div class="flex items-center gap-3.5 min-w-0">
+<img alt="Sovereign Spatial Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WAZF9CfCUrKfK6UV4WV47BYGkPtuVOw1V2elUro0o5VFeU2a6pMCBDu4iXtm2VUUnVuoNECOsSnNB5lNJcumXaJ4Kpgn-CqqgjMx-M3CJYfBdej61tUQ61nZsgdPlgiYDOGw0UV2-ZpcOpUaJve_Ljlpe-ADIWsts6QupfZT0RnydmEQFXm29qU5HnkoDGroRljTWCC6gDQQ2T2h_X4R1UtHHkf52sTmHQwhJ91Guwzw"/>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-sm tracking-wider text-on-surface uppercase truncate">Sovereign Spatial</span>
+<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 uppercase tracking-wide">KE-MESH</span>
+</div>
+<span class="text-xs text-on-surface-variant truncate hidden sm:inline">Republic of Kenya National GIS Data Mesh</span>
+</div>
+</div>
+<div class="hidden xl:flex items-center gap-3 bg-surface-container px-3.5 py-1.5 rounded-lg border border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+</span>
+<span class="text-xs font-semibold text-emerald-700 uppercase">PostGIS Node 01: Synced</span>
+</div>
+<div class="h-3 w-px bg-slate-300"></div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-tertiary">radar</span>
+<span class="text-xs tracking-tight">EPSG:3857 | Arc 1960 (UTM 37S)</span>
+</div>
+<div class="h-3 w-px bg-slate-300"></div>
+<div class="text-xs text-slate-600 font-mono">1°17'34.2"S 36°49'17.8"E</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative hidden md:flex items-center bg-surface-container px-3 py-1.5 rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-sm text-on-surface-variant mr-2">account_balance</span>
+<select class="bg-transparent text-xs font-medium text-on-surface focus:outline-none cursor-pointer pr-4">
+<option value="kenha">KeNHA - National Highways</option>
+<option value="ncc">Nairobi City County</option>
+<option value="kura">KURA - Urban Roads</option>
+<option value="kerra">KeRRA - Rural Roads</option>
+<option value="mol">Ministry of Lands &amp; Physical Planning</option>
+<option value="uon">Academic Portal - UoN / JKUAT</option>
+</select>
+</div>
+<button class="relative p-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface border border-outline-variant hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-base">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-tertiary rounded-full ring-2 ring-white"></span>
+</button>
+<div class="flex items-center gap-2 pl-1 border-l border-outline-variant">
+<img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbrSloEGRcCW0XpHVnD4R0wt3Dg7gFgsP8pSQ_J0G9RYCnZzsrZMHNw6jn1SW0_KyuQaiFy9do3a0fSlxxrdG0djNWUyxdJfLZmYS-VxsE9NahsA363oH49Y-WircKrMx0PhBqK9OnQ0CWJmYRZJkNyimWA37-CRCIby6dyMxanh85wtxFl_PhG6hNGZv-ooaw8kRBebu-DHn9GXoSbPtcQFQlkDEWg7ZAIyBxj137"/>
+<div class="hidden 2xl:flex flex-col text-left">
+<span class="text-xs font-semibold text-on-surface leading-tight">Eng. K. Kiprop</span>
+<span class="text-[11px] text-on-surface-variant leading-tight">Chief Cadastral Surveyor</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Sidebar -->
+<aside class="fixed left-0 top-16 bottom-0 w-72 bg-white z-40 flex flex-col justify-between border-r border-outline-variant shadow-sm">
+<div class="flex flex-col flex-1 overflow-y-auto px-4 py-5">
+<div class="px-3 mb-2">
+<span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Spatial Mesh Governance</span>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary-container text-white font-medium shadow-sm transition-all" data-path="dashboard-and-mesh" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-xs">Dashboard &amp; Mesh</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all" data-path="encroachment-and-subdivision" href="#">
+<span class="material-symbols-outlined text-xl">polyline</span>
+<span class="text-xs">Encroachment &amp; Subdivision</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all" data-path="ai-multimodal-extraction" href="#">
+<span class="material-symbols-outlined text-xl">document_scanner</span>
+<span class="text-xs">AI Multimodal Extraction</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all" data-path="g2g-spatial-repository" href="#">
+<span class="material-symbols-outlined text-xl">share_location</span>
+<span class="text-xs">G2G Spatial Repository</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all" data-path="academic-and-research" href="#">
+<span class="material-symbols-outlined text-xl">school</span>
+<span class="text-xs">Academic &amp; Research</span>
+</a>
+</nav>
+<div class="mt-6 px-3 mb-2">
+<span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Security Infrastructure</span>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all" data-path="authentication-and-rls" href="#">
+<span class="material-symbols-outlined text-xl">security</span>
+<span class="text-xs">Authentication &amp; RLS</span>
+</a>
+</nav>
+</div>
+<div class="p-3.5 bg-slate-50 border border-outline-variant m-4 rounded-lg flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-500 font-medium">Sovereign Ledger</span>
+<span class="text-[11px] font-bold text-primary uppercase bg-primary/10 px-1.5 py-0.5 rounded">v3.8-G2G</span>
+</div>
+<div class="text-[11px] text-slate-600 truncate font-mono">Node: KE-NRB-POSTGIS-09</div>
+<div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full w-5/6"></div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="pl-72">
+<main class="relative w-full pt-16 min-h-screen bg-background">
+<div class="flex flex-col w-full">
+<div class="px-8 py-6 flex flex-col gap-6 max-w-[1720px] mx-auto w-full">
+<!-- Top Banner Header -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-5 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-blue-50 border border-blue-100 rounded-lg text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">domain_verification</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-lg font-bold text-slate-900 tracking-tight">KeNHA &amp; NaMSIP Spatial Gateway</span>
+<span class="px-2 py-0.5 rounded bg-blue-50 border border-blue-200 text-primary text-[11px] font-semibold uppercase tracking-wider">Mesh Node 04</span>
+<span class="px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-semibold uppercase">Federated Authority</span>
+</div>
+<p class="text-xs text-slate-600">Kenya National Highways Authority • Nairobi Metropolitan Services Spatial Infrastructure Division</p>
+</div>
+</div>
+<div class="flex items-center gap-2.5 flex-wrap">
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white border border-outline-variant text-slate-700 hover:bg-slate-50 transition-colors shadow-sm text-xs font-semibold" id="topologySyncBtn">
+<span class="material-symbols-outlined text-base">sync</span>
+<span>Re-Index Topology</span>
+</button>
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary-container text-white hover:bg-primary transition-all shadow-sm text-xs font-semibold" id="openPublishModalBtn">
+<span class="material-symbols-outlined text-base">cloud_upload</span>
+<span>Push to National Mesh</span>
+</button>
+</div>
+</div>
+<!-- 4 Stats Cards (with renamed terminology) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<!-- 1. Published Maps & Datasets -->
+<div class="bg-white p-5 rounded-xl flex flex-col justify-between border border-outline-variant shadow-sm relative overflow-hidden group">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Published Maps &amp; Datasets</span>
+<span class="p-2 rounded-lg bg-blue-50 text-primary border border-blue-100"><span class="material-symbols-outlined text-xl">layers</span></span>
+</div>
+<div class="mt-4">
+<div class="text-3xl font-bold text-slate-900 font-sans">42</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="text-xs font-semibold text-primary uppercase">Vector Layers Active</span>
+<span class="text-slate-400 text-xs">• Arc1960/UTM</span>
+</div>
+</div>
+<div class="mt-3 w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-4/5"></div>
+</div>
+</div>
+<!-- 2. Connected Agencies & Counties -->
+<div class="bg-white p-5 rounded-xl flex flex-col justify-between border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Connected Agencies &amp; Counties</span>
+<span class="p-2 rounded-lg bg-teal-50 text-teal-700 border border-teal-100"><span class="material-symbols-outlined text-xl">admin_panel_settings</span></span>
+</div>
+<div class="mt-4">
+<div class="text-3xl font-bold text-slate-900 font-sans">18</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="text-xs font-semibold text-teal-700 uppercase">County Councils Connected</span>
+<span class="text-slate-400 text-xs">• Strict RLS</span>
+</div>
+</div>
+<div class="mt-3 flex gap-1">
+<span class="h-1.5 flex-1 rounded-full bg-teal-600"></span>
+<span class="h-1.5 flex-1 rounded-full bg-teal-600"></span>
+<span class="h-1.5 flex-1 rounded-full bg-slate-200"></span>
+</div>
+</div>
+<!-- 3. Data Sync Status: Real-time -->
+<div class="bg-white p-5 rounded-xl flex flex-col justify-between border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Data Sync Status: Real-time</span>
+<span class="p-2 rounded-lg bg-blue-50 text-primary border border-blue-100"><span class="material-symbols-outlined text-xl">hub</span></span>
+</div>
+<div class="mt-4">
+<div class="text-3xl font-bold text-primary font-sans">99.98%</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-xs font-semibold text-slate-700 uppercase">Zero-Gap Stream</span>
+<span class="text-slate-400 text-xs">• 42ms Latency</span>
+</div>
+</div>
+<div class="mt-3 w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-emerald-600 h-full w-[99.98%]"></div>
+</div>
+</div>
+<!-- 4. Total Registered Land Parcels -->
+<div class="bg-white p-5 rounded-xl flex flex-col justify-between border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Registered Land Parcels</span>
+<span class="p-2 rounded-lg bg-amber-50 text-amber-700 border border-amber-100"><span class="material-symbols-outlined text-xl">pentagon</span></span>
+</div>
+<div class="mt-4">
+<div class="text-3xl font-bold text-slate-900 font-sans">1,248,390</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="text-xs font-semibold text-amber-700 uppercase">Polygons Indexed</span>
+<span class="text-slate-400 text-xs">• +2,840 today</span>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-xs text-slate-500">
+<span>GIST Indexes Valid</span>
+<span class="text-amber-800 font-medium">ST_IsValid: 100%</span>
+</div>
+</div>
+</div>
+<!-- Middle Section: Node Architecture & Federation Health -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+<div class="lg:col-span-2 bg-white p-5 rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-2xl">dns</span>
+<div>
+<h2 class="text-base font-bold text-slate-900">Node Cluster Architecture</h2>
+<span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Independent Mesh Engine</span>
+</div>
+</div>
+<div class="flex items-center gap-2 bg-slate-50 border border-outline-variant px-3 py-1 rounded-lg">
+<span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+<span class="text-xs text-slate-700 font-mono font-medium">KeNHA-NRB-MESH-04</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 py-2">
+<div class="bg-slate-50 border border-outline-variant p-3.5 rounded-lg flex flex-col gap-1">
+<span class="text-[11px] font-semibold text-slate-500 uppercase">RDBMS &amp; Engine</span>
+<span class="text-sm font-bold text-slate-900 font-mono">PostGIS 15.3</span>
+<span class="text-xs text-slate-500">GEOS 3.11.2 • PROJ 9.2.1</span>
+</div>
+<div class="bg-slate-50 border border-outline-variant p-3.5 rounded-lg flex flex-col gap-1">
+<span class="text-[11px] font-semibold text-slate-500 uppercase">Routing Extension</span>
+<span class="text-sm font-bold text-slate-900 font-mono">pgRouting 3.4</span>
+<span class="text-xs text-slate-500">Cost matrix ready (Trunk)</span>
+</div>
+<div class="bg-slate-50 border border-outline-variant p-3.5 rounded-lg flex flex-col gap-1">
+<span class="text-[11px] font-semibold text-slate-500 uppercase">Spatial Server</span>
+<span class="text-sm font-bold text-slate-900 font-mono">GeoServer 2.24</span>
+<span class="text-xs text-slate-500">WFS 2.0.0 / WMS / OGC API</span>
+</div>
+</div>
+<div class="mt-4 p-3 bg-slate-50 border border-outline-variant rounded-lg flex flex-col sm:flex-row items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-amber-50 border border-amber-100 rounded-md text-amber-700">
+<span class="material-symbols-outlined text-lg">security_update_good</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-slate-900">Spatial Cryptographic Seal Verified</span>
+<span class="text-[11px] text-slate-500 font-mono">SHA256: 9e4f71a0b36...KeNHA-GovMesh-Sign</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold px-2.5 py-1 bg-white border border-outline-variant text-primary rounded-lg uppercase shadow-2xs">Immutable Audit Trail</span>
+</div>
+</div>
+<div class="bg-white p-5 rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-base font-bold text-slate-900">Federation Health</h2>
+<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded uppercase">All Healthy</span>
+</div>
+<p class="text-xs text-slate-500 mb-3.5">Autonomous consensus heartbeat against Republic of Kenya root registry.</p>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between p-2.5 bg-slate-50 border border-outline-variant rounded-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">wifi_tethering</span>
+<span class="text-xs font-medium text-slate-800">Ministry of Lands RLS Bus</span>
+</div>
+<span class="text-[11px] font-bold text-emerald-700 font-mono">CONNECTED</span>
+</div>
+<div class="flex items-center justify-between p-2.5 bg-slate-50 border border-outline-variant rounded-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">share_location</span>
+<span class="text-xs font-medium text-slate-800">Nairobi Metropolitan WFS Pipe</span>
+</div>
+<span class="text-[11px] font-bold text-primary font-mono">STREAMING</span>
+</div>
+<div class="flex items-center justify-between p-2.5 bg-slate-50 border border-outline-variant rounded-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-600 text-sm">cached</span>
+<span class="text-xs font-medium text-slate-800">KeRRA Rural Mesh Interlink</span>
+</div>
+<span class="text-[11px] font-bold text-amber-700 font-mono">IDLE / SYNCED</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-2 border-t border-outline-variant flex items-center justify-between text-slate-500 text-xs">
+<span>Target Bounding Box:</span>
+<span class="font-mono text-slate-700 font-medium">36.65E - 37.15E | 1.15S - 1.45S</span>
+</div>
+</div>
+</div>
+<!-- Dataset Versioning & Lineage -> Map Updates & Version History -->
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col">
+<div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-outline-variant bg-slate-50/75">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">folder_managed</span>
+<h2 class="text-base font-bold text-slate-900">Map Updates &amp; Version History</h2>
+</div>
+<p class="text-xs text-slate-500 mt-0.5">Git-style distributed spatial tables hosted on KeNHA sovereign partition.</p>
+</div>
+<div class="flex items-center gap-2.5 flex-wrap">
+<div class="relative">
+<input class="bg-white text-slate-900 text-xs px-3 py-2 rounded-lg pl-8 focus:outline-none focus:ring-1 focus:ring-primary border border-outline-variant w-64 placeholder:text-slate-400 shadow-2xs" id="datasetSearch" placeholder="Filter layers or hashes..." type="text"/>
+<span class="material-symbols-outlined text-slate-400 absolute left-2.5 top-2.5 text-base">search</span>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-outline-variant text-slate-700 hover:bg-slate-100 transition-colors text-xs font-semibold shadow-2xs" id="uploadDatasetBtn">
+<span class="material-symbols-outlined text-base">upload_file</span>
+<span>Upload Shp/GeoPackage</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-100/80 text-slate-600 text-[11px] font-semibold uppercase tracking-wider border-b border-outline-variant">
+<th class="py-3 px-5">Spatial Product &amp; Revision</th>
+<th class="py-3 px-4">Commit Hash</th>
+<th class="py-3 px-4">RLS Boundary Scope</th>
+<th class="py-3 px-4">Downstream Consumers</th>
+<th class="py-3 px-4">Format &amp; Features</th>
+<th class="py-3 px-5 text-right">Autonomous Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant text-xs">
+<tr class="hover:bg-slate-50 transition-colors bg-white">
+<td class="py-3.5 px-5">
+<div class="flex items-center gap-3">
+<span class="p-2 rounded bg-blue-50 border border-blue-100 text-primary"><span class="material-symbols-outlined text-base">route</span></span>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-900 leading-tight">National Trunk Road Reserves (A104, B8, C98)</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.2 rounded bg-slate-100 font-mono text-[10px] font-semibold text-primary border border-slate-200">v4.2.1-prod</span>
+<span class="text-slate-400 text-[11px]">Published by Survey Dept.</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1 font-mono text-slate-700 text-xs font-medium">
+<span class="material-symbols-outlined text-xs text-slate-400">commit</span>
+<span>7b80a1c</span>
+</div>
+<span class="text-slate-400 text-[11px]">Dual carriageway realignment</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="px-2 py-0.5 rounded bg-teal-50 border border-teal-200 text-teal-800 text-[11px] font-medium">Class A/B Corridor Buffer</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1 flex-wrap">
+<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[11px]">Nairobi City</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[11px]">Kiambu</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[11px]">Machakos</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-slate-800">GeoPackage • MultiPolygon</span>
+<span class="text-slate-400 text-[11px]">491,200 entities</span>
+</div>
+</td>
+<td class="py-3.5 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded border border-outline-variant hover:bg-slate-100 text-primary transition-colors action-sync-btn" title="Trigger Topology Sync">
+<span class="material-symbols-outlined text-base">sync_problem</span>
+</button>
+<button class="p-1.5 rounded border border-outline-variant hover:bg-slate-100 text-amber-600 transition-colors action-rollback-btn" title="Rollback Commit">
+<span class="material-symbols-outlined text-base">history</span>
+</button>
+<button class="p-1.5 rounded border border-outline-variant hover:bg-slate-100 text-slate-600 transition-colors" title="Inspect WFS Feed">
+<span class="material-symbols-outlined text-base">terminal</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors bg-slate-50/50">
+<td class="py-3.5 px-5">
+<div class="flex items-center gap-3">
+<span class="p-2 rounded bg-amber-50 border border-amber-100 text-amber-700"><span class="material-symbols-outlined text-base">alt_route</span></span>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-900 leading-tight">Gazetted Bypass Corridors (Southern / Eastern / Western)</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.2 rounded bg-slate-100 font-mono text-[10px] font-semibold text-amber-700 border border-slate-200">v3.0.0-gazette</span>
+<span class="text-slate-400 text-[11px]">Legal Survey Fix</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1 font-mono text-slate-700 text-xs font-medium">
+<span class="material-symbols-outlined text-xs text-slate-400">commit</span>
+<span>4f11e92</span>
+</div>
+<span class="text-slate-400 text-[11px]">National Park Boundary excision</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="px-2 py-0.5 rounded bg-blue-50 border border-blue-200 text-primary text-[11px] font-medium">NaMSIP Metropole</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1 flex-wrap">
+<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[11px]">KWS Wildlife</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[11px]">KURA</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[11px]">Kajiado</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-slate-800">PostGIS Table • ST_Polygon</span>
+<span class="text-slate-400 text-[11px]">112,840 entities</span>
+</div>
+</td>
+<td class="py-3.5 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded border border-outline-variant hover:bg-slate-100 text-primary transition-colors action-sync-btn" title="Trigger Topology Sync">
+<span class="material-symbols-outlined text-base">sync_problem</span>
+</button>
+<button class="p-1.5 rounded border border-outline-variant hover:bg-slate-100 text-amber-600 transition-colors action-rollback-btn" title="Rollback Commit">
+<span class="material-symbols-outlined text-base">history</span>
+</button>
+<button class="p-1.5 rounded border border-outline-variant hover:bg-slate-100 text-slate-600 transition-colors" title="Inspect WFS Feed">
+<span class="material-symbols-outlined text-base">terminal</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors bg-white">
+<td class="py-3.5 px-5">
+<div class="flex items-center gap-3">
+<span class="p-2 rounded bg-teal-50 border border-teal-100 text-teal-700"><span class="material-symbols-outlined text-base">shield</span></span>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-900 leading-tight">Right-of-Way (RoW) Boundary Buffers</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.2 rounded bg-slate-100 font-mono text-[10px] font-semibold text-teal-700 border border-slate-200">v5.1.2-sec</span>
+<span class="text-slate-400 text-[11px]">Encroachment Clearance Active</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1 font-mono text-slate-700 text-xs font-medium">
+<span class="material-symbols-outlined text-xs text-slate-400">commit</span>
+<span>9c2a8f0</span>
+</div>
+<span class="text-slate-400 text-[11px]">60m reserve offset enforcement</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="px-2 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-800 text-[11px] font-medium">Encroachment Surveillance</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1 flex-wrap">
+<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[11px]">Survey of Kenya</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[11px]">Nairobi NCC</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-slate-800">GeoJSON • FeatureCollection</span>
+<span class="text-slate-400 text-[11px]">644,350 entities</span>
+</div>
+</td>
+<td class="py-3.5 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded border border-outline-variant hover:bg-slate-100 text-primary transition-colors action-sync-btn" title="Trigger Topology Sync">
+<span class="material-symbols-outlined text-base">sync_problem</span>
+</button>
+<button class="p-1.5 rounded border border-outline-variant hover:bg-slate-100 text-amber-600 transition-colors action-rollback-btn" title="Rollback Commit">
+<span class="material-symbols-outlined text-base">history</span>
+</button>
+<button class="p-1.5 rounded border border-outline-variant hover:bg-slate-100 text-slate-600 transition-colors" title="Inspect WFS Feed">
+<span class="material-symbols-outlined text-base">terminal</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-3.5 bg-slate-50 border-t border-outline-variant flex flex-col sm:flex-row items-center justify-between gap-2 text-slate-500 text-xs">
+<div class="flex items-center gap-2">
+<span>Active PostGIS Connections: 34 pool</span>
+<span>•</span>
+<span>Replication Lag: 0.00ms</span>
+</div>
+<div class="flex items-center gap-2">
+<span>Showing 3 of 42 Published Mesh Entities</span>
+</div>
+</div>
+</div>
+<!-- Decentralized Access Delegation -> Grant Agency Permissions -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-4">
+<div class="xl:col-span-7 bg-white p-5 rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-1 mb-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-teal-700 text-xl">share_reviews</span>
+<h2 class="text-base font-bold text-slate-900">Grant Agency Permissions</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-teal-50 border border-teal-200 text-teal-800 text-[11px] font-semibold uppercase">Zero-Trust RLS Engine</span>
+</div>
+<p class="text-xs text-slate-500">Instantly provision authenticated PostGIS view privileges for partner agencies or accredited researchers without central gatekeeping.</p>
+</div>
+<form class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 bg-slate-50 p-4 rounded-lg border border-outline-variant" id="delegationForm">
+<div class="flex flex-col gap-1">
+<label class="text-[11px] font-semibold text-slate-600 uppercase">Grantee Entity / Institutional Domain</label>
+<select class="bg-white text-slate-900 text-xs px-3 py-2 rounded-lg border border-outline-variant focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shadow-2xs" id="granteeSelect">
+<option value="kiambu">Kiambu County Directorate of Survey</option>
+<option value="machakos">Machakos County Land Registrar</option>
+<option value="kajiado">Kajiado Urban Planning Division</option>
+<option value="uon">University of Nairobi (Dept. of Geospatial &amp; Space Tech)</option>
+<option value="jkuat">JKUAT (Geomatic Engineering Research Lab)</option>
+<option value="kura">KURA Regional Urban Infrastructure Command</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[11px] font-semibold text-slate-600 uppercase">Spatial Product Subscription</label>
+<select class="bg-white text-slate-900 text-xs px-3 py-2 rounded-lg border border-outline-variant focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shadow-2xs" id="layerSelect">
+<option value="row_buffer">Right-of-Way (RoW) Boundary Buffers (v5.1.2)</option>
+<option value="trunk_reserves">National Trunk Road Reserves (v4.2.1)</option>
+<option value="bypasses">Gazetted Bypass Corridors (v3.0.0)</option>
+<option value="all_kenha">Full KeNHA Highway Mesh (Restricted Access)</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[11px] font-semibold text-slate-600 uppercase">Geometry Spatial Scope (Predicate)</label>
+<select class="bg-white text-slate-900 text-xs px-3 py-2 rounded-lg border border-outline-variant focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shadow-2xs" id="scopeSelect">
+<option value="nrb_metro">ST_Within(geom, Nairobi_Metropolitan_BBox)</option>
+<option value="county_boundary">ST_Intersects(geom, Grantee_County_Polygon)</option>
+<option value="corridor_500m">ST_DWithin(geom, Trunk_Axis, 500.0)</option>
+<option value="research_anonymized">ST_SimplifyPreserveTopology(geom, 2.5) [Academic Mode]</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[11px] font-semibold text-slate-600 uppercase">Grant Validity Duration</label>
+<select class="bg-white text-slate-900 text-xs px-3 py-2 rounded-lg border border-outline-variant focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shadow-2xs" id="validitySelect">
+<option value="30">30 Days (Renewable Token)</option>
+<option value="90">90 Days (Quarterly County Sync)</option>
+<option value="365">1 Year (Inter-Agency SLA)</option>
+<option value="ephemeral">Ephemeral (Single Query Export Token)</option>
+</select>
+</div>
+<div class="sm:col-span-2 flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5 text-slate-500 text-xs">
+<span class="material-symbols-outlined text-sm text-primary">verified_user</span>
+<span>Generates cryptographic read JWT with PostgreSQL pg_policy injection</span>
+</div>
+<button class="px-4 py-2 bg-primary-container text-white rounded-lg text-xs font-semibold hover:bg-primary transition-all shadow-sm" type="submit">
+                    Authorize Read Token
+                  </button>
+</div>
+</form>
+</div>
+<!-- Spatial Verification Context -->
+<div class="xl:col-span-5 bg-white p-5 rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-600 text-xl">satellite_alt</span>
+<h2 class="text-base font-bold text-slate-900">Spatial Verification Context</h2>
+</div>
+<span class="text-[11px] font-semibold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded font-mono">UTM 37S ARC1960</span>
+</div>
+<p class="text-xs text-slate-500 mb-3.5">Live cadastral parcel overlay over A104 Mombasa Road corridor reserve.</p>
+<div class="relative rounded-lg overflow-hidden h-48 bg-slate-900 border border-outline-variant flex items-center justify-center">
+<img class="object-cover w-full h-full opacity-80" data-alt="High-resolution satellite view of the Nairobi highway interchange with neon teal vector polygon overlays highlighting road reserve corridors and cadastral parcels, technical GIS dark mode map interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARUhVlf8MVhebGwltb2HuOyz8Nz2fBd5zNsrXt9preJSdIb72kitmGQGHVIUJhjZSGR9N3Ptyv39s-JkJhIjtiAUZRjMFhBX7IALFlPG21imhC95rXhqyPaeZczxoOPBeZVMxYus10i5MjHiXKGB7l9AItnBZdmHzM3b7QeRlOGPn7auVeIjXneQQjrTpnTjapoZMjXC_D5LTT4ziOml2TdTYVoJd4iubeJCnjgj0q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-mono font-semibold text-primary flex items-center gap-1.5 shadow">
+<span class="h-1.5 w-1.5 rounded-full bg-primary animate-ping"></span>
+<span>A104 KM 12+400 BUFFER</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between bg-white/95 backdrop-blur-md p-2 rounded text-slate-600 text-xs border border-slate-200">
+<div class="flex items-center gap-1 font-mono text-slate-900 font-medium">
+<span class="material-symbols-outlined text-xs text-primary">polyline</span>
+<span>Encroachment Delta: 0.00 m²</span>
+</div>
+<span class="text-emerald-700 font-mono font-semibold">ST_Overlaps: FALSE</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-2 border-t border-outline-variant flex items-center justify-between text-xs text-slate-500">
+<span>Active Viewport: Nairobi City Express Hub</span>
+<span class="font-mono text-slate-700 font-medium">EPSG:21097 (Arc 1960 / UTM zone 37S)</span>
+</div>
+</div>
+</div>
+<!-- Live Distributed Sync Ledger -> Recent Activity Log -->
+<div class="bg-white rounded-xl p-5 border border-outline-variant shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">dynamic_feed</span>
+<h2 class="text-base font-bold text-slate-900">Recent Activity Log</h2>
+</div>
+<div class="flex items-center gap-2 text-slate-500 text-xs">
+<span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span>Continuous WebSocket Feed (Kenya Government Service Bus)</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 font-mono text-xs">
+<div class="p-3 bg-slate-50 border border-outline-variant rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-2 hover:bg-slate-100/80 transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<span class="px-2 py-0.5 rounded bg-blue-50 border border-blue-200 text-primary text-[10px] font-bold uppercase shrink-0">KeRRA-SYNC</span>
+<div class="truncate text-slate-800">
+<span class="font-bold text-slate-900 font-sans">KeRRA Node 12 (Rural Road Expansion)</span>
+<span class="text-slate-600 font-sans"> pushed 412 secondary road alignments in Kiambu North.</span>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0 text-slate-500">
+<span class="text-teal-700 font-medium">RLS: Matched Boundary</span>
+<span>08s ago</span>
+<span class="material-symbols-outlined text-emerald-600 text-sm">check_circle</span>
+</div>
+</div>
+<div class="p-3 bg-slate-50 border border-outline-variant rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-2 hover:bg-slate-100/80 transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<span class="px-2 py-0.5 rounded bg-teal-50 border border-teal-200 text-teal-800 text-[10px] font-bold uppercase shrink-0">NCC-CADASTRAL</span>
+<div class="truncate text-slate-800">
+<span class="font-bold text-slate-900 font-sans">Nairobi City County GIS Directorate</span>
+<span class="text-slate-600 font-sans"> validated zoning polygon partition on Waiyaki Way corridor.</span>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0 text-slate-500">
+<span class="text-teal-700 font-medium">Topology Clean</span>
+<span>42s ago</span>
+<span class="material-symbols-outlined text-emerald-600 text-sm">check_circle</span>
+</div>
+</div>
+<div class="p-3 bg-slate-50 border border-outline-variant rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-2 hover:bg-slate-100/80 transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<span class="px-2 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-800 text-[10px] font-bold uppercase shrink-0">MOL-NOTARY</span>
+<div class="truncate text-slate-800">
+<span class="font-bold text-slate-900 font-sans">Ministry of Lands ArdhiSasa Bridge</span>
+<span class="text-slate-600 font-sans"> verified land title ledger block #49281 against A104 reserve.</span>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0 text-slate-500">
+<span class="text-amber-800 font-medium">Cryptographic Sign Verified</span>
+<span>2m ago</span>
+<span class="material-symbols-outlined text-primary text-sm">verified</span>
+</div>
+</div>
+<div class="p-3 bg-slate-50 border border-outline-variant rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-2 hover:bg-slate-100/80 transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<span class="px-2 py-0.5 rounded bg-slate-200 border border-slate-300 text-slate-700 text-[10px] font-bold uppercase shrink-0">UON-RESEARCH</span>
+<div class="truncate text-slate-800">
+<span class="font-bold text-slate-900 font-sans">University of Nairobi Geomatics</span>
+<span class="text-slate-600 font-sans"> queried ST_DWithin 250m corridor for traffic emission spatial modeling.</span>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0 text-slate-500">
+<span class="text-slate-700 font-medium">Token: ACAD-9912</span>
+<span>5m ago</span>
+<span class="material-symbols-outlined text-slate-500 text-sm">lock_open</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Publish Modal -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden" id="publishModal">
+<div class="bg-white max-w-xl w-full rounded-xl p-6 shadow-2xl border border-outline-variant flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">publish</span>
+<h3 class="text-base font-bold text-slate-900">Publish Layer to National Spatial Mesh</h3>
+</div>
+<button class="text-slate-400 hover:text-slate-700 p-1" id="closePublishModalBtn">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<p class="text-xs text-slate-500">Publishing creates an immutable distributed release record across all 47 counties and partner sovereign agencies.</p>
+<div class="flex flex-col gap-3">
+<div>
+<label class="text-[11px] font-semibold text-slate-600 uppercase">Select Staged Spatial Table</label>
+<select class="w-full mt-1 bg-slate-50 text-slate-900 text-xs px-3 py-2 rounded-lg border border-outline-variant focus:outline-none">
+<option>kenha_staging.nairobi_eastern_bypass_dualing_asbuilt_2024</option>
+<option>kenha_staging.kenya_uganda_corridor_weighbridge_nodes</option>
+<option>kenha_staging.thika_superhighway_drainage_culverts</option>
+</select>
+</div>
+<div>
+<label class="text-[11px] font-semibold text-slate-600 uppercase">Release Type &amp; Semantic Tag</label>
+<div class="grid grid-cols-3 gap-2 mt-1">
+<label class="flex items-center gap-2 p-2 bg-slate-50 border border-outline-variant rounded-lg cursor-pointer">
+<input checked="" class="accent-primary" name="relType" type="radio" value="patch"/>
+<span class="text-xs text-slate-900 font-medium">Patch (v4.2.2)</span>
+</label>
+<label class="flex items-center gap-2 p-2 bg-slate-50 border border-outline-variant rounded-lg cursor-pointer">
+<input class="accent-primary" name="relType" type="radio" value="minor"/>
+<span class="text-xs text-slate-900 font-medium">Minor (v4.3.0)</span>
+</label>
+<label class="flex items-center gap-2 p-2 bg-slate-50 border border-outline-variant rounded-lg cursor-pointer">
+<input class="accent-primary" name="relType" type="radio" value="major"/>
+<span class="text-xs text-slate-900 font-medium">Major (v5.0.0)</span>
+</label>
+</div>
+</div>
+<div>
+<label class="text-[11px] font-semibold text-slate-600 uppercase">Topology Enforcement Check</label>
+<div class="mt-1 p-2.5 bg-slate-50 border border-outline-variant rounded-lg flex items-center justify-between text-slate-600 text-xs">
+<span>ST_IsValid() Pre-check: 100% Passed (0 self-intersections)</span>
+<span class="text-emerald-700 font-semibold text-[11px] uppercase">VERIFIED</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end gap-2.5 pt-2">
+<button class="px-3.5 py-2 text-slate-600 hover:text-slate-900 text-xs font-semibold" id="cancelModalBtn">Cancel</button>
+<button class="px-4 py-2 rounded-lg bg-primary-container text-white text-xs font-semibold hover:bg-primary shadow-sm" id="confirmPublishBtn">
+                Execute National Broadcast
+              </button>
+</div>
+</div>
+</div>
+<!-- Toast Notification -->
+<div class="fixed bottom-6 right-6 z-50 bg-white text-slate-900 px-4 py-3 rounded-xl border border-outline-variant shadow-lg flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none translate-y-4" id="toastNotification">
+<div class="p-2 rounded bg-blue-50 border border-blue-100 text-primary flex items-center justify-center" id="toastIconContainer">
+<span class="material-symbols-outlined text-lg" id="toastIcon">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-900" id="toastTitle">Success</span>
+<span class="text-[11px] text-slate-500" id="toastMessage">Action completed.</span>
+</div>
+</div>
+</div>
+<script>
+        (function () {
+          const publishModal = document.getElementById('publishModal');
+          const openPublishModalBtn = document.getElementById('openPublishModalBtn');
+          const closePublishModalBtn = document.getElementById('closePublishModalBtn');
+          const cancelModalBtn = document.getElementById('cancelModalBtn');
+          const confirmPublishBtn = document.getElementById('confirmPublishBtn');
+          const topologySyncBtn = document.getElementById('topologySyncBtn');
+          const delegationForm = document.getElementById('delegationForm');
+          const toastNotification = document.getElementById('toastNotification');
+          const toastTitle = document.getElementById('toastTitle');
+          const toastMessage = document.getElementById('toastMessage');
+          const toastIcon = document.getElementById('toastIcon');
+
+          function showToast(title, message, icon = 'check_circle') {
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            toastIcon.textContent = icon;
+            toastNotification.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+            toastNotification.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => {
+              toastNotification.classList.remove('opacity-100', 'translate-y-0');
+              toastNotification.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+            }, 4000);
+          }
+
+          if (openPublishModalBtn && publishModal) {
+            openPublishModalBtn.addEventListener('click', () => {
+              publishModal.classList.remove('hidden');
+            });
+          }
+
+          function closeModal() {
+            if (publishModal) publishModal.classList.add('hidden');
+          }
+
+          if (closePublishModalBtn) closePublishModalBtn.addEventListener('click', closeModal);
+          if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
+
+          if (confirmPublishBtn) {
+            confirmPublishBtn.addEventListener('click', () => {
+              closeModal();
+              showToast('National Mesh Broadcast Committed', 'Broadcasted new topology revision to all 47 counties and Survey of Kenya.', 'campaign');
+            });
+          }
+
+          if (topologySyncBtn) {
+            topologySyncBtn.addEventListener('click', () => {
+              topologySyncBtn.classList.add('animate-pulse');
+              setTimeout(() => {
+                topologySyncBtn.classList.remove('animate-pulse');
+                showToast('Topology Sync Completed', 'pgRouting cost graphs and ST_Valid boundaries re-indexed.', 'done_all');
+              }, 1200);
+            });
+          }
+
+          if (delegationForm) {
+            delegationForm.addEventListener('submit', (e) => {
+              e.preventDefault();
+              const grantee = document.getElementById('granteeSelect');
+              const granteeText = grantee.options[grantee.selectedIndex].text;
+              showToast('Read Privileges Granted', `Autonomous RLS grant injected for ${granteeText}.`, 'verified_user');
+            });
+          }
+
+          document.querySelectorAll('.action-sync-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              showToast('Layer Topology Verified', 'ST_CoverageInvalidEdges checked against county cadastral borders.', 'sync');
+            });
+          });
+
+          document.querySelectorAll('.action-rollback-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              showToast('Rollback Staged', 'Reverting layer to previous verified Git commit tag.', 'history');
+            });
+          });
+
+          const datasetSearch = document.getElementById('datasetSearch');
+          if (datasetSearch) {
+            datasetSearch.addEventListener('input', (e) => {
+              const val = e.target.value.toLowerCase();
+              const rows = document.querySelectorAll('tbody tr');
+              rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(val) ? '' : 'none';
+              });
+            });
+          }
+
+          const uploadDatasetBtn = document.getElementById('uploadDatasetBtn');
+          if (uploadDatasetBtn) {
+            uploadDatasetBtn.addEventListener('click', () => {
+              showToast('Direct Ingestion Ready', 'Drag & drop GeoPackage or Shapefile (.shp + .shx + .dbf + .prj) to KeNHA Node 04.', 'upload_file');
+            });
+          }
+        })();
+      </script>
+</main>
+</div>
+</body></html>

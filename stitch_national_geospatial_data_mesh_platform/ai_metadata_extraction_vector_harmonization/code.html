@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_dashboard" name="shell-type"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-variant": "#d3e4fe",
+            "surface-container": "#e5eeff",
+            "on-primary-container": "#fdfcff",
+            "secondary-fixed": "#89f5e7",
+            "surface-tint": "#006398",
+            "inverse-on-surface": "#eaf1ff",
+            "primary": "#006194",
+            "on-tertiary": "#ffffff",
+            "on-surface-variant": "#3f4850",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#fffbff",
+            "surface-dim": "#cbdbf5",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#eff4ff",
+            "tertiary-fixed-dim": "#ffb77d",
+            "on-secondary-fixed": "#00201d",
+            "outline-variant": "#bfc7d2",
+            "on-secondary-fixed-variant": "#005049",
+            "primary-fixed-dim": "#93ccff",
+            "on-tertiary-fixed-variant": "#6e3900",
+            "on-primary-fixed-variant": "#004b73",
+            "inverse-surface": "#213145",
+            "secondary-container": "#86f2e4",
+            "outline": "#707881",
+            "surface-container-high": "#dce9ff",
+            "secondary": "#006a61",
+            "on-tertiary-fixed": "#2f1500",
+            "tertiary-container": "#b15f00",
+            "on-secondary-container": "#006f66",
+            "on-background": "#0b1c30",
+            "on-error-container": "#93000a",
+            "inverse-primary": "#93ccff",
+            "surface-bright": "#f8f9ff",
+            "primary-fixed": "#cce5ff",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "secondary-fixed-dim": "#6bd8cb",
+            "on-primary-fixed": "#001d31",
+            "tertiary-fixed": "#ffdcc3",
+            "primary-container": "#007bb9",
+            "error": "#ba1a1a",
+            "on-primary": "#ffffff",
+            "tertiary": "#8d4b00",
+            "surface-container-highest": "#d3e4fe",
+            "surface": "#f8f9ff",
+            "on-surface": "#0b1c30",
+            "background": "#f8f9ff"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-sm": "0.5rem",
+            "space-2xs": "0.125rem",
+            "margin-desktop": "1.5rem",
+            "margin": "1rem",
+            "space-2xl": "2rem",
+            "space-md": "0.75rem",
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "space-xl": "1.5rem",
+            "space-lg": "1rem",
+            "gutter-desktop": "1.5rem"
+          },
+          fontFamily: {
+            sans: ["Public Sans", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-[#f8fafc] font-sans text-sm text-[#0f172a] antialiased">
+<!-- Top Navigation Header -->
+<header class="fixed top-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md z-50 border-b border-[#e2e8f0] shadow-sm">
+<div class="w-full h-full px-6 flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 min-w-0">
+<img alt="Sovereign Spatial Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WAZF9CfCUrKfK6UV4WV47BYGkPtuVOw1V2elUro0o5VFeU2a6pMCBDu4iXtm2VUUnVuoNECOsSnNB5lNJcumXaJ4Kpgn-CqqgjMx-M3CJYfBdej61tUQ61nZsgdPlgiYDOGw0UV2-ZpcOpUaJve_Ljlpe-ADIWsts6QupfZT0RnydmEQFXm29qU5HnkoDGroRljTWCC6gDQQ2T2h_X4R1UtHHkf52sTmHQwhJ91Guwzw"/>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-xs uppercase tracking-wider text-[#0f172a] truncate">Sovereign Spatial</span>
+<span class="text-[11px] font-semibold px-1.5 py-0.5 rounded bg-sky-100 text-[#006194] uppercase tracking-wide">KE-MESH</span>
+</div>
+<span class="text-xs text-[#64748b] truncate hidden sm:inline">Republic of Kenya National GIS Data Mesh</span>
+</div>
+</div>
+<div class="hidden xl:flex items-center gap-3 bg-[#f1f5f9] px-3.5 py-1.5 rounded-lg border border-[#e2e8f0]">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+</span>
+<span class="text-xs font-semibold text-emerald-800 uppercase tracking-wide">PostGIS Node 01: Synced</span>
+</div>
+<div class="h-3 w-px bg-[#cbd5e1]"></div>
+<div class="flex items-center gap-1.5 text-[#475569]">
+<span class="material-symbols-outlined text-sm text-[#006194]">radar</span>
+<span class="text-xs font-medium">EPSG:3857 | Arc 1960 (UTM 37S)</span>
+</div>
+<div class="h-3 w-px bg-[#cbd5e1]"></div>
+<div class="text-xs text-[#006194] font-mono font-medium">1°17'34.2"S 36°49'17.8"E</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative hidden md:flex items-center bg-[#f8fafc] border border-[#e2e8f0] px-3 py-1.5 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-sm text-[#64748b] mr-2">account_balance</span>
+<select class="bg-transparent text-xs font-semibold text-[#1e293b] focus:outline-none cursor-pointer pr-4">
+<option class="bg-white text-[#0f172a]" value="kenha">KeNHA - National Highways</option>
+<option class="bg-white text-[#0f172a]" value="ncc">Nairobi City County</option>
+<option class="bg-white text-[#0f172a]" value="kura">KURA - Urban Roads</option>
+<option class="bg-white text-[#0f172a]" value="kerra">KeRRA - Rural Roads</option>
+<option class="bg-white text-[#0f172a]" value="mol">Ministry of Lands &amp; Physical Planning</option>
+<option class="bg-white text-[#0f172a]" value="uon">Academic Portal - UoN / JKUAT</option>
+</select>
+</div>
+<button class="relative p-2 rounded-lg bg-white border border-[#e2e8f0] text-[#64748b] hover:text-[#0f172a] hover:bg-[#f1f5f9] transition-colors shadow-sm">
+<span class="material-symbols-outlined text-lg leading-none">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-500 rounded-full ring-2 ring-white"></span>
+</button>
+<div class="flex items-center gap-2.5 pl-1 border-l border-[#e2e8f0]">
+<img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-[#cbd5e1]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbrSloEGRcCW0XpHVnD4R0wt3Dg7gFgsP8pSQ_J0G9RYCnZzsrZMHNw6jn1SW0_KyuQaiFy9do3a0fSlxxrdG0djNWUyxdJfLZmYS-VxsE9NahsA363oH49Y-WircKrMx0PhBqK9OnQ0CWJmYRZJkNyimWA37-CRCIby6dyMxanh85wtxFl_PhG6hNGZv-ooaw8kRBebu-DHn9GXoSbPtcQFQlkDEWg7ZAIyBxj137"/>
+<div class="hidden 2xl:flex flex-col text-left">
+<span class="text-xs font-semibold text-[#0f172a] leading-tight">Eng. K. Kiprop</span>
+<span class="text-[11px] text-[#64748b] leading-tight">Chief Cadastral Surveyor</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Sidebar -->
+<aside class="fixed left-0 top-16 bottom-0 w-72 bg-white border-r border-[#e2e8f0] z-40 flex flex-col justify-between shadow-sm">
+<div class="flex flex-col flex-1 overflow-y-auto px-4 py-5">
+<div class="px-2 mb-3">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wider">Spatial Mesh Governance</span>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] transition-all font-medium text-xs" data-path="dashboard-and-mesh" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span>Dashboard &amp; Mesh</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] transition-all font-medium text-xs" data-path="encroachment-and-subdivision" href="#">
+<span class="material-symbols-outlined text-lg">polyline</span>
+<span>Encroachment &amp; Subdivision</span>
+</a>
+<a aria-current="page" class="flex items-center gap-3 px-3 py-2.5 bg-[#006194] text-white font-semibold rounded-lg shadow-sm" data-path="ai-multimodal-extraction" href="#">
+<span class="material-symbols-outlined text-lg">document_scanner</span>
+<span>AI Multimodal Extraction</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] transition-all font-medium text-xs" data-path="g2g-spatial-repository" href="#">
+<span class="material-symbols-outlined text-lg">share_location</span>
+<span>G2G Spatial Repository</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] transition-all font-medium text-xs" data-path="academic-and-research" href="#">
+<span class="material-symbols-outlined text-lg">school</span>
+<span>Academic &amp; Research</span>
+</a>
+</nav>
+<div class="mt-6 px-2 mb-3">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wider">Security Infrastructure</span>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] transition-all font-medium text-xs" data-path="authentication-and-rls" href="#">
+<span class="material-symbols-outlined text-lg">security</span>
+<span>Authentication &amp; RLS</span>
+</a>
+</nav>
+</div>
+<!-- Ledger Status Card -->
+<div class="p-3.5 bg-[#f8fafc] border border-[#e2e8f0] m-4 rounded-lg flex flex-col gap-1.5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-[#334155]">Sovereign Ledger</span>
+<span class="text-[11px] font-bold text-[#006194] uppercase bg-sky-50 px-1.5 py-0.5 rounded border border-sky-200">v3.8-G2G</span>
+</div>
+<div class="text-[11px] font-mono text-[#64748b] truncate">Node: KE-NRB-POSTGIS-09</div>
+<div class="w-full bg-[#e2e8f0] h-1.5 rounded-full overflow-hidden mt-1">
+<div class="bg-[#006194] h-full w-5/6"></div>
+</div>
+</div>
+</aside>
+<!-- Main Content Layout -->
+<div class="pl-72">
+<main class="relative w-full pt-16 min-h-screen bg-[#f8fafc]">
+<div class="flex flex-col w-full">
+<!-- Top Banner / Title Bar -->
+<div class="w-full px-8 py-5 bg-white border-b border-[#e2e8f0]">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<div class="flex items-center justify-center w-11 h-11 rounded-lg bg-[#006194] text-white shadow-sm">
+<span class="material-symbols-outlined text-2xl">document_scanner</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<h1 class="text-lg font-bold text-[#0f172a]">Smart Deed Scanner &amp; Map Matcher</h1>
+<span class="text-xs font-semibold px-2 py-0.5 rounded bg-sky-50 text-[#006194] border border-sky-200">v4.2-NEURAL-OCR</span>
+</div>
+<p class="text-xs text-[#475569] mt-0.5">Automated document reading for Survey of Kenya plans with unified cross-agency parcel matching.</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-2.5">
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#f1f5f9] text-[#334155] border border-[#e2e8f0] font-mono text-xs">
+<span class="material-symbols-outlined text-sm text-[#006194]">memory</span>
+<span>Speed: 142ms · Gemini-1.5-Pro Spatial</span>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-[#cbd5e1] text-[#334155] hover:bg-[#f8fafc] hover:border-[#94a3b8] transition-colors shadow-sm font-semibold text-xs" id="rerunModelBtn">
+<span class="material-symbols-outlined text-base">cached</span>
+<span>Re-run Scanner</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-[#cbd5e1] text-[#334155] hover:bg-[#f8fafc] hover:border-[#94a3b8] transition-all shadow-sm font-semibold text-xs">
+<span class="material-symbols-outlined text-base text-[#006a61]">download</span>
+<span>Export GeoPackage</span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#006194] text-white font-semibold hover:bg-[#004b73] transition-all shadow-sm text-xs" id="commitMeshBtn">
+<span class="material-symbols-outlined text-base">database</span>
+<span>Save to Master Map Registry</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Metrics Row -->
+<div class="w-full px-8 py-4 grid grid-cols-1 md:grid-cols-4 gap-4 bg-white border-b border-[#e2e8f0]">
+<!-- Card 1 -->
+<div class="p-3.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wide">Target Deed</span>
+<span class="text-base font-bold text-[#0f172a] font-mono mt-0.5">LR NO. 209/14328</span>
+<span class="text-xs text-[#64748b]">Deed Plan No. 198421 / SoK</span>
+</div>
+<span class="material-symbols-outlined text-3xl text-[#006194]">verified</span>
+</div>
+<!-- Card 2 -->
+<div class="p-3.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wide">Scanner Precision</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="text-base font-bold text-[#006194]">99.4%</span>
+<span class="text-[11px] text-[#64748b]">Accuracy Rate</span>
+</div>
+<span class="text-xs text-[#64748b]">All text fields mapped cleanly</span>
+</div>
+<svg class="w-9 h-9 text-[#006194]" viewbox="0 0 36 36">
+<path class="text-[#e2e8f0]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-[#006194]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="99.4, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+<!-- Card 3 -->
+<div class="p-3.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wide">Boundary Closure</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="text-base font-bold text-[#8d4b00]">98.7%</span>
+<span class="text-[11px] text-[#64748b]">Variance &lt; 0.002m</span>
+</div>
+<span class="text-xs text-[#64748b]">Arc 1960 to GPS Verified</span>
+</div>
+<svg class="w-9 h-9 text-[#8d4b00]" viewbox="0 0 36 36">
+<path class="text-[#e2e8f0]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-[#8d4b00]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="98.7, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+<!-- Card 4 -->
+<div class="p-3.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wide">Standardized Agencies</span>
+<span class="text-base font-bold text-[#006a61] mt-0.5">3 Agencies</span>
+<span class="text-xs text-[#64748b]">City County · KeNHA · Lands</span>
+</div>
+<span class="material-symbols-outlined text-3xl text-[#006a61]">hub</span>
+</div>
+</div>
+<!-- 3-Column Main Workspace -->
+<div class="w-full px-8 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Column 1: Deed Plan Preview & Surveyor Card -->
+<div class="lg:col-span-4 flex flex-col gap-5">
+<!-- Deed Plan Card -->
+<div class="p-4 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-3">
+<div class="flex items-center justify-between border-b border-[#f1f5f9] pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg text-[#006194]">center_focus_strong</span>
+<span class="text-xs font-bold text-[#0f172a] uppercase tracking-wide">Source Deed Plan Preview</span>
+</div>
+<span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-[#f1f5f9] text-[#334155] border border-[#e2e8f0]">Sheet 45/IV</span>
+</div>
+<!-- Preview Frame: Clear, legible, light style -->
+<div class="relative w-full h-[460px] rounded-lg overflow-hidden bg-slate-50 border border-[#cbd5e1] shadow-inner">
+<img class="w-full h-full object-cover mix-blend-multiply opacity-90 contrast-125 filter" data-alt="A vintage Kenyan Survey of Kenya cadastral deed plan map blueprint on textured archival survey paper. Shows intricate technical drafting lines, cadastral polygon bearings, trigonometrical beacons, official red wax governmental stamps, and Ministry of Lands signatures under technical studio light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPRzZx30t9zTAhvwRUtlPFXqzUArTI0PMGnSK-cTISmoY--BnyGaFSbhaR_YgNTubHj88-Ls_Gl0cyg7YO0lDF6fdtgrzVXvBvKk06qepX2l7eFHaNBBjB3jlbHcuWqDSMv01L9Aq8cOhUsOs8CtfSADBlHphiUmcgJddmlm0QRY8YnGALHCJjZPZSZyuOzSPrJPvyrFnlzrcY2rlGKIu7QO9n90DragbzQZwWCHXC"/>
+<!-- Badges / Overlays (Clean light theme styles) -->
+<div class="absolute top-4 left-4 bg-white/95 backdrop-blur-md rounded border border-sky-300 shadow-md p-2 flex flex-col justify-center">
+<span class="text-[10px] font-bold text-[#006194] font-mono tracking-wider">OFFICIAL SEAL DETECTED</span>
+<span class="text-[11px] text-[#334155] font-medium">Survey of Kenya (1984)</span>
+</div>
+<div class="absolute top-24 right-4 bg-white/95 backdrop-blur-md rounded border border-amber-300 shadow-md p-2.5 flex flex-col gap-1 w-44">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold text-[#8d4b00]">COORDINATES</span>
+<span class="text-[9px] font-semibold text-white bg-[#8d4b00] px-1 py-0.2 rounded">99.8%</span>
+</div>
+<div class="text-[11px] text-[#334155] font-mono leading-snug">
+                    X: 254819.12 E<br/>Y: 9857412.88 N<br/>Datum: Arc 1960
+                  </div>
+</div>
+<div class="absolute bottom-16 left-4 w-52 bg-white/95 backdrop-blur-md rounded border border-sky-300 shadow-md p-2.5 flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold text-[#006194]">PARCEL SHAPE</span>
+<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-sky-100 text-[#006194]">6 CORNERS</span>
+</div>
+<div class="w-full h-16 rounded bg-[#f8fafc] border border-[#e2e8f0] flex items-center justify-center p-1">
+<svg class="w-full h-full text-[#006194]" viewbox="0 0 100 60">
+<polygon fill="#006194" fill-opacity="0.18" points="15,45 25,12 75,8 90,38 60,52 30,50" stroke="#006194" stroke-dasharray="2,2" stroke-width="1.8"></polygon>
+<circle cx="15" cy="45" fill="#8d4b00" r="2.5"></circle>
+<circle cx="25" cy="12" fill="#8d4b00" r="2.5"></circle>
+<circle cx="75" cy="8" fill="#8d4b00" r="2.5"></circle>
+<circle cx="90" cy="38" fill="#8d4b00" r="2.5"></circle>
+<circle cx="60" cy="52" fill="#8d4b00" r="2.5"></circle>
+<circle cx="30" cy="50" fill="#8d4b00" r="2.5"></circle>
+</svg>
+</div>
+<span class="text-xs text-[#334155] font-mono font-medium">Area: 4.821 Hectares</span>
+</div>
+<div class="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md rounded border border-[#cbd5e1] px-2.5 py-1.5 flex items-center justify-between gap-3 shadow-md">
+<span class="text-[11px] text-[#475569] font-medium">Scale: 1:2500</span>
+<span class="text-[11px] text-[#006194] font-mono font-semibold">UTM Zone 37S</span>
+</div>
+</div>
+<!-- Document Hash Details -->
+<div class="flex items-center justify-between pt-1 px-1 text-[#64748b]">
+<span class="text-xs">Document Fingerprint: <code class="text-[#006194] font-mono font-medium">sha256:88a4c1...</code></span>
+<button class="text-xs font-semibold text-[#006194] hover:underline flex items-center gap-0.5">
+<span class="material-symbols-outlined text-sm">zoom_in</span> View Full File
+                </button>
+</div>
+</div>
+<!-- Surveyor Attestation Ledger -->
+<div class="p-4 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-2.5">
+<span class="text-xs font-bold text-[#0f172a] uppercase tracking-wide">Surveyor Credentials &amp; Approval</span>
+<div class="space-y-1.5 text-xs">
+<div class="flex items-center justify-between p-2 rounded bg-[#f8fafc] border border-[#f1f5f9]">
+<span class="text-[#64748b]">Licensed Surveyor:</span>
+<span class="text-[#0f172a] font-semibold">Surv. M. O. Odhiambo</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-[#f8fafc] border border-[#f1f5f9]">
+<span class="text-[#64748b]">Board Registration No:</span>
+<span class="text-[#006194] font-mono font-bold">MISK/2014/89</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-[#f8fafc] border border-[#f1f5f9]">
+<span class="text-[#64748b]">Survey Director Approval:</span>
+<span class="text-[#334155] font-mono font-medium">14-AUG-1984</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-[#f8fafc] border border-[#f1f5f9]">
+<span class="text-[#64748b]">Official Stamp Check:</span>
+<span class="text-emerald-700 font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span> Verified (ISK Registry)
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 2: Scanning Results & Boundary Coordinates -->
+<div class="lg:col-span-4 flex flex-col gap-5">
+<div class="p-4 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-3.5">
+<div class="flex items-center justify-between border-b border-[#f1f5f9] pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg text-[#006194]">psychology</span>
+<span class="text-xs font-bold text-[#0f172a] uppercase tracking-wide">Automatic Extraction Results</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+<span class="text-[11px] font-semibold text-emerald-800">Complete</span>
+</div>
+</div>
+<!-- Sheet Reference -->
+<div class="p-3.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] shadow-xs flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wide">Survey Sheet Reference</span>
+<span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-sky-50 text-[#006194] border border-sky-200">99.7% Match</span>
+</div>
+<div class="text-base font-bold text-[#0f172a] font-mono">RIM Sheet 45/IV (Block 12)</div>
+<p class="text-xs text-[#475569]">Found in the header section of the Ministry of Lands Survey Sheet.</p>
+</div>
+<!-- Computed Area -->
+<div class="p-3.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] shadow-xs flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wide">Calculated Size vs Deed Record</span>
+<span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200">99.9% Match</span>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="text-base font-bold text-[#006194] font-mono">4.821 Hectares</span>
+<span class="text-xs text-[#475569] font-mono">Original Deed: 11.91 Acres</span>
+</div>
+<div class="w-full bg-[#e2e8f0] h-1.5 rounded-full overflow-hidden">
+<div class="bg-[#006194] h-full w-full"></div>
+</div>
+<div class="flex justify-between text-[11px] text-[#64748b]">
+<span>Acreage: 11.912 Acres</span>
+<span>Standard Metric: 48,210 m²</span>
+</div>
+</div>
+<!-- Boundary Corner Coordinates (Renamed from Beacon Coordinate Transform (WKT)) -->
+<div class="p-3.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] shadow-xs flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wide">Boundary Corner Coordinates</span>
+<span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-amber-50 text-[#8d4b00] border border-amber-200">6 Corners</span>
+</div>
+<div class="p-2.5 rounded bg-white border border-[#e2e8f0] font-mono text-xs text-[#334155] overflow-x-auto space-y-1">
+<div>Corner 1: [36.82191, -1.29215] <span class="text-[#64748b]">(Arc1960: 254812, 9857410)</span></div>
+<div>Corner 2: [36.82420, -1.29188] <span class="text-[#64748b]">(Arc1960: 255067, 9857440)</span></div>
+<div>Corner 3: [36.82510, -1.29340] <span class="text-[#64748b]">(Arc1960: 255167, 9857271)</span></div>
+<div>Corner 4: [36.82380, -1.29490] <span class="text-[#64748b]">(Arc1960: 255022, 9857105)</span></div>
+<div>Corner 5: [36.82150, -1.29410] <span class="text-[#64748b]">(Arc1960: 254766, 9857194)</span></div>
+<div>Corner 6: [36.82100, -1.29320] <span class="text-[#64748b]">(Arc1960: 254710, 9857294)</span></div>
+</div>
+<div class="flex items-center gap-1.5 text-xs text-[#475569]">
+<span class="material-symbols-outlined text-sm text-[#006194]">check_circle</span>
+<span>Coordinates accurately converted to modern GPS standards (WGS84).</span>
+</div>
+</div>
+<!-- Road Corridor Proximity -->
+<div class="p-3.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] shadow-xs flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wide">Road Corridor Proximity</span>
+<span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-[#f1f5f9] text-[#334155] border border-[#e2e8f0]">KeNHA Highways</span>
+</div>
+<span class="text-sm font-bold text-[#0f172a]">A104 Mombasa Road Alignment</span>
+<p class="text-xs text-[#475569]">Clearance verified: Property boundary is set back +18.4m from the national road corridor reserve line.</p>
+</div>
+</div>
+</div>
+<!-- Column 3: Format & Field Matching Tool -->
+<div class="lg:col-span-4 flex flex-col gap-5">
+<div class="p-4 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-3.5">
+<div class="flex items-center justify-between border-b border-[#f1f5f9] pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg text-[#006194]">sync_alt</span>
+<!-- Renamed from Vector Attribute Harmonizer -->
+<span class="text-xs font-bold text-[#0f172a] uppercase tracking-wide">Format &amp; Field Matching Tool</span>
+</div>
+<span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-sky-50 text-[#006194] border border-sky-200">KNSDI 2024 Engine</span>
+</div>
+<!-- Recommendation Card -->
+<div class="p-3.5 rounded-lg bg-amber-50/60 border border-amber-200 flex flex-col gap-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-amber-800 text-base">auto_fix_high</span>
+<span class="text-xs font-bold text-amber-900 uppercase">Suggested Conversion</span>
+</div>
+<p class="text-xs text-[#334155] leading-relaxed">
+                  Legacy Deed field <code class="text-amber-900 bg-amber-100/70 px-1 py-0.5 rounded font-mono text-[11px]">Deed_Acreage</code> (11.91) automatically aligned to National Standard Metric Cadastre <code class="text-[#006194] bg-sky-100/70 px-1 py-0.5 rounded font-mono text-[11px]">AREA_HA</code> (4.8210).
+                </p>
+<div class="flex items-center justify-between pt-1 border-t border-amber-200/60 text-xs">
+<span class="text-amber-800">Confidence Score</span>
+<span class="text-[#006194] font-mono font-bold">99.8% Match</span>
+</div>
+</div>
+<!-- Standardized Agency Fields (Renamed from Multi-Agency Schema Crosswalk) -->
+<div class="flex flex-col gap-2">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wide">Standardized Agency Fields</span>
+<div class="overflow-x-auto rounded-lg border border-[#e2e8f0]">
+<table class="w-full text-left text-xs">
+<thead class="bg-[#f1f5f9] text-[#475569] font-bold text-[11px] uppercase border-b border-[#e2e8f0]">
+<tr>
+<th class="py-2.5 px-3">County (NCC)</th>
+<th class="py-2.5 px-3">National (Lands)</th>
+<th class="py-2.5 px-3">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#e2e8f0] font-mono bg-white">
+<tr class="hover:bg-[#f8fafc] transition-colors">
+<td class="py-2 px-3 text-[#334155] font-semibold">prop_id</td>
+<td class="py-2 px-3 text-[#006194]">LR_NUMBER</td>
+<td class="py-2 px-3">
+<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">Exact</span>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fafc] transition-colors">
+<td class="py-2 px-3 text-[#334155] font-semibold">sq_meters</td>
+<td class="py-2 px-3 text-[#006194]">AREA_HA</td>
+<td class="py-2 px-3">
+<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-sky-100 text-[#006194]">Converted</span>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fafc] transition-colors">
+<td class="py-2 px-3 text-[#334155] font-semibold">zone_cat</td>
+<td class="py-2 px-3 text-[#006194]">KNSDI_LAND_USE</td>
+<td class="py-2 px-3">
+<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">Mapped</span>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fafc] transition-colors">
+<td class="py-2 px-3 text-[#334155] font-semibold">rd_buffer</td>
+<td class="py-2 px-3 text-[#006194]">CORRIDOR_OFFSET</td>
+<td class="py-2 px-3">
+<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-900">KeNHA OK</span>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fafc] transition-colors">
+<td class="py-2 px-3 text-[#334155] font-semibold">owner_tin</td>
+<td class="py-2 px-3 text-[#006194]">KRA_PIN_HASH</td>
+<td class="py-2 px-3">
+<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-sky-100 text-[#006194]">SHA-256</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Map Boundary Data Preview -->
+<div class="flex flex-col gap-1.5 pt-1">
+<span class="text-[11px] font-semibold text-[#64748b] uppercase tracking-wide">Map Geometry Data (GeoJSON)</span>
+<div class="rounded-lg bg-[#f8fafc] border border-[#e2e8f0] p-3 font-mono text-xs text-[#334155]">
+<pre class="overflow-x-auto text-[11px] leading-relaxed text-[#475569]"><code>{
+  "type": "Feature",
+  "properties": {
+    "LR_NUMBER": "209/14328",
+    "AREA_HA": 4.821,
+    "RIM_SHEET": "45/IV",
+    "SRID": "EPSG:4326",
+    "DEED_NO": "198421"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[[36.8219,-1.2921],[36.8242,-1.2918],[36.8251,-1.2934],[36.8238,-1.2949],[36.8215,-1.2941],[36.8219,-1.2921]]]
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Verification Summary & Legal Compliance (Renamed from Spatial Integrity & Sovereign Chain of Custody) -->
+<div class="w-full px-8 py-3 mb-8">
+<div class="p-5 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<div class="p-2.5 rounded-lg bg-sky-50 text-[#006194] border border-sky-200">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-sm font-bold text-[#0f172a]">Verification Summary &amp; Legal Compliance</h2>
+<p class="text-xs text-[#475569] mt-0.5">
+                  Document verified under Survey Act (Cap 299) Laws of Kenya. Record is prepared and ready for final registry entry.
+                </p>
+</div>
+</div>
+<div class="flex items-center gap-2.5 w-full md:w-auto justify-end">
+<button class="px-4 py-2 rounded-lg bg-white border border-[#cbd5e1] text-[#334155] hover:bg-[#f8fafc] hover:border-[#94a3b8] transition-colors font-semibold text-xs shadow-sm" id="discardBtn">
+                Reject Deed Plan
+              </button>
+<button class="px-5 py-2 rounded-lg bg-[#006194] text-white font-semibold hover:bg-[#004b73] shadow-sm transition-all text-xs flex items-center gap-1.5" id="approveCommitBtn">
+<span class="material-symbols-outlined text-base">check_circle</span>
+                Commit to National Mesh
+              </button>
+</div>
+</div>
+</div>
+<!-- Toast Notification -->
+<div class="fixed bottom-6 right-6 px-4 py-3 rounded-lg bg-[#0f172a] text-white shadow-xl flex items-center gap-2.5 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-50 text-xs font-medium" id="toastNotification">
+<span class="material-symbols-outlined text-lg text-emerald-400">check_circle</span>
+<span id="toastMessage">Parcel successfully added to the National Map Registry.</span>
+</div>
+</div>
+</main>
+</div>
+<script>
+    (function() {
+      const rerunBtn = document.getElementById('rerunModelBtn');
+      const commitBtn = document.getElementById('commitMeshBtn');
+      const approveCommitBtn = document.getElementById('approveCommitBtn');
+      const discardBtn = document.getElementById('discardBtn');
+      const toast = document.getElementById('toastNotification');
+      const toastMessage = document.getElementById('toastMessage');
+
+      function showNotification(text) {
+        if (!toast) return;
+        toastMessage.textContent = text;
+        toast.classList.remove('translate-y-24', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(() => {
+          toast.classList.add('translate-y-24', 'opacity-0');
+          toast.classList.remove('translate-y-0', 'opacity-100');
+        }, 3500);
+      }
+
+      if (rerunBtn) {
+        rerunBtn.addEventListener('click', () => {
+          rerunBtn.classList.add('animate-pulse');
+          showNotification('Re-scanning Deed Plan text boxes and boundary markers...');
+          setTimeout(() => {
+            rerunBtn.classList.remove('animate-pulse');
+            showNotification('Scan updated. Precision: 99.4%');
+          }, 1200);
+        });
+      }
+
+      if (commitBtn) {
+        commitBtn.addEventListener('click', () => {
+          showNotification('Saving LR NO. 209/14328 directly to Node KE-NRB-POSTGIS-09...');
+        });
+      }
+
+      if (approveCommitBtn) {
+        approveCommitBtn.addEventListener('click', () => {
+          approveCommitBtn.textContent = 'Saving...';
+          setTimeout(() => {
+            approveCommitBtn.innerHTML = '<span class="material-symbols-outlined text-base">done_all</span> Added to National Map';
+            approveCommitBtn.classList.replace('bg-[#006194]', 'bg-emerald-700');
+            showNotification('Parcel verified and officially committed to the National Registry.');
+          }, 800);
+        });
+      }
+
+      if (discardBtn) {
+        discardBtn.addEventListener('click', () => {
+          showNotification('Deed extraction marked for manual Land Registrar review.');
+        });
+      }
+    })();
+  </script>
+</body></html>

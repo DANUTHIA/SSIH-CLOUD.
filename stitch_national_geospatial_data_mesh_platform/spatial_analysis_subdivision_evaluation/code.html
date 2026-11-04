@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_dashboard" name="shell-type"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#006194',
+              600: '#00527c',
+              700: '#004265',
+            }
+          },
+          fontFamily: {
+            sans: ['"Public Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-[#f8fafc] font-sans text-sm text-[#0f172a] antialiased">
+<!-- Top Navigation Header -->
+<header class="fixed top-0 left-0 right-0 h-16 bg-white border-b border-[#e2e8f0] z-50 shadow-sm">
+<div class="w-full h-full px-6 flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 min-w-0">
+<img alt="Sovereign Spatial Logo" class="h-8 w-auto object-contain rounded" src="https://lh3.googleusercontent.com/aida/AEtjO1WAZF9CfCUrKfK6UV4WV47BYGkPtuVOw1V2elUro0o5VFeU2a6pMCBDu4iXtm2VUUnVuoNECOsSnNB5lNJcumXaJ4Kpgn-CqqgjMx-M3CJYfBdej61tUQ61nZsgdPlgiYDOGw0UV2-ZpcOpUaJve_Ljlpe-ADIWsts6QupfZT0RnydmEQFXm29qU5HnkoDGroRljTWCC6gDQQ2T2h_X4R1UtHHkf52sTmHQwhJ91Guwzw"/>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-bold text-sm tracking-wide text-[#0f172a] uppercase">Sovereign Spatial</span>
+<span class="text-xs px-1.5 py-0.5 rounded font-semibold bg-[#e0f2fe] text-[#0369a1] uppercase">KE-MESH</span>
+</div>
+<span class="text-xs text-[#64748b] truncate hidden sm:inline">Republic of Kenya National Land &amp; GIS Coordination Mesh</span>
+</div>
+</div>
+<!-- Sync Status & Coordinates -->
+<div class="hidden xl:flex items-center gap-4 bg-[#f1f5f9] px-4 py-1.5 rounded-lg border border-[#e2e8f0]">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+</span>
+<span class="text-xs font-semibold text-emerald-800 tracking-wide uppercase">Database Mesh: Online</span>
+</div>
+<div class="h-3 w-px bg-[#cbd5e1]"></div>
+<div class="flex items-center gap-1.5 text-[#475569] text-xs">
+<span class="material-symbols-outlined text-[15px] text-[#0284c7]">radar</span>
+<span class="font-medium">EPSG:3857 | Arc 1960 (UTM 37S)</span>
+</div>
+<div class="h-3 w-px bg-[#cbd5e1]"></div>
+<div class="text-xs font-mono text-[#334155]">1°17'34.2"S 36°49'17.8"E</div>
+</div>
+<!-- User & Authority Controls -->
+<div class="flex items-center gap-3">
+<div class="relative hidden md:flex items-center bg-[#f8fafc] border border-[#cbd5e1] px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-base text-[#64748b] mr-1.5">account_balance</span>
+<select class="bg-transparent text-xs font-medium text-[#1e293b] focus:outline-none cursor-pointer pr-4">
+<option value="kenha">KeNHA - National Highways</option>
+<option value="ncc">Nairobi City County</option>
+<option value="kura">KURA - Urban Roads</option>
+<option value="kerra">KeRRA - Rural Roads</option>
+<option value="mol">Ministry of Lands &amp; Physical Planning</option>
+<option value="uon">Academic Portal - UoN / JKUAT</option>
+</select>
+</div>
+<button class="relative p-2 rounded-lg bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#475569] transition-colors border border-[#e2e8f0]">
+<span class="material-symbols-outlined text-lg leading-none">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-500 rounded-full"></span>
+</button>
+<div class="flex items-center gap-2 pl-1 border-l border-[#e2e8f0]">
+<img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-[#cbd5e1]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbrSloEGRcCW0XpHVnD4R0wt3Dg7gFgsP8pSQ_J0G9RYCnZzsrZMHNw6jn1SW0_KyuQaiFy9do3a0fSlxxrdG0djNWUyxdJfLZmYS-VxsE9NahsA363oH49Y-WircKrMx0PhBqK9OnQ0CWJmYRZJkNyimWA37-CRCIby6dyMxanh85wtxFl_PhG6hNGZv-ooaw8kRBebu-DHn9GXoSbPtcQFQlkDEWg7ZAIyBxj137"/>
+<div class="hidden 2xl:flex flex-col text-left">
+<span class="text-xs font-semibold text-[#0f172a] leading-tight">Eng. K. Kiprop</span>
+<span class="text-[11px] text-[#64748b] leading-tight">Chief Cadastral Surveyor</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Left Sidebar -->
+<aside class="fixed left-0 top-16 bottom-0 w-64 bg-white border-r border-[#e2e8f0] z-40 flex flex-col justify-between">
+<div class="flex flex-col flex-1 overflow-y-auto px-4 py-5">
+<div class="px-2 mb-3">
+<span class="text-[11px] font-bold text-[#94a3b8] uppercase tracking-wider">Spatial Mesh Governance</span>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] font-medium text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span>Dashboard &amp; Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#006194] text-white font-semibold text-xs shadow-sm shadow-[#006194]/20" href="#">
+<span class="material-symbols-outlined text-lg">polyline</span>
+<span>Land Subdivision Review</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] font-medium text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">document_scanner</span>
+<span>AI Multimodal Extraction</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] font-medium text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">share_location</span>
+<span>G2G Spatial Repository</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] font-medium text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">school</span>
+<span>Academic &amp; Research</span>
+</a>
+</nav>
+<div class="mt-6 px-2 mb-3">
+<span class="text-[11px] font-bold text-[#94a3b8] uppercase tracking-wider">Security &amp; Audit</span>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] font-medium text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">security</span>
+<span>Authentication &amp; Permissions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a] font-medium text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">history</span>
+<span>Audit Log History</span>
+</a>
+</nav>
+</div>
+<!-- Node Footnote Box -->
+<div class="p-3 bg-[#f8fafc] m-3 rounded-lg border border-[#e2e8f0] flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-[#334155]">Sovereign Ledger</span>
+<span class="text-[11px] font-bold text-[#006194]">v3.8-G2G</span>
+</div>
+<div class="text-[11px] text-[#64748b] truncate font-mono">Node: KE-NRB-POSTGIS-09</div>
+<div class="w-full bg-[#e2e8f0] h-1.5 rounded-full overflow-hidden mt-0.5">
+<div class="bg-[#006194] h-full w-5/6 rounded-full"></div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="pl-64">
+<main class="relative w-full pt-16 min-h-screen bg-[#f8fafc]">
+<div class="flex flex-col w-full">
+<!-- Sub-header Bar -->
+<div class="px-6 py-4 bg-white border-b border-[#e2e8f0] flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-[#e0f2fe] text-[#006194] flex items-center justify-center border border-[#bae6fd]">
+<span class="material-symbols-outlined text-2xl">rule</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<h1 class="text-base font-bold text-[#0f172a] tracking-tight">CAD Spatial Validator</h1>
+<span class="px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">Rule Engine Active</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#f1f5f9] text-[#475569] border border-[#e2e8f0]">Automated Boundary Conflict Checker</span>
+</div>
+<span class="text-xs text-[#64748b] truncate mt-0.5">Automated Land Subdivision &amp; Right-of-Way (RoW) Clearance Adjudication System</span>
+</div>
+</div>
+<div class="flex items-center gap-2.5">
+<div class="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#f1f5f9] text-[#334155] text-xs border border-[#e2e8f0]">
+<span class="material-symbols-outlined text-base text-[#006194]">verified_user</span>
+<span>Authority: KeNHA / Nairobi Physical Planning Joint Board</span>
+</div>
+<button class="px-3.5 py-2 rounded-lg bg-white border border-[#cbd5e1] hover:bg-[#f1f5f9] text-[#334155] text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-base">refresh</span>
+<span>Re-run Topology</span>
+</button>
+<button class="px-3.5 py-2 rounded-lg bg-[#006194] hover:bg-[#00527c] text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-base">download</span>
+<span>Dispatch Report</span>
+</button>
+</div>
+</div>
+<!-- 3-Column Grid Workspace -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-5 p-6">
+<!-- Column 1: Upload Plan & Controls -->
+<div class="xl:col-span-3 flex flex-col gap-4">
+<div class="p-5 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-[#f1f5f9] pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#006194] text-xl">upload_file</span>
+<span class="text-xs font-bold text-[#0f172a] uppercase tracking-wide">Upload Subdivision Plan</span>
+</div>
+<span class="text-[11px] font-semibold text-[#0369a1] bg-[#e0f2fe] px-2 py-0.5 rounded border border-[#bae6fd]">AutoCAD / GIS</span>
+</div>
+<!-- Drag & Drop Zone -->
+<div class="group relative rounded-xl bg-[#f8fafc] border-2 border-dashed border-[#cbd5e1] hover:border-[#006194] hover:bg-[#f0f9ff] p-5 flex flex-col items-center justify-center text-center cursor-pointer transition-all">
+<div class="w-11 h-11 rounded-full bg-[#e0f2fe] text-[#006194] flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl">cloud_upload</span>
+</div>
+<span class="text-xs font-bold text-[#0f172a] mb-0.5">Drop CAD / Vector File</span>
+<span class="text-[11px] text-[#64748b] max-w-[210px] leading-tight">Supports DWG, DXF (v2018+), SHP (Zipped), GeoJSON, LandXML</span>
+<div class="mt-3 px-2.5 py-1 rounded bg-white border border-[#cbd5e1] text-[#334155] text-[11px] font-mono flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-sm text-emerald-600">check_circle</span>
+<span class="truncate">LR_209_18423_Rev3_Final.dwg</span>
+</div>
+</div>
+<!-- Metadata Box -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold text-[#64748b] uppercase tracking-wider">Target Parcel Metadata</span>
+<span class="text-[11px] font-mono text-[#006194] font-semibold">KEN-CADA-2024</span>
+</div>
+<div class="p-3.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] flex flex-col gap-2 text-xs">
+<div class="flex justify-between items-center">
+<span class="text-[#64748b]">Cadastral Ref:</span>
+<span class="font-bold text-[#0f172a]">LR No. 209/18423</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[#64748b]">Corridor Zone:</span>
+<span class="font-medium text-[#1e293b]">Dagoretti / Ngong Rd Link</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[#64748b]">Proposed Sub-Plots:</span>
+<span class="font-mono font-semibold text-[#006194]">24 Residential Units</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[#64748b]">Gross Plan Area:</span>
+<span class="font-mono font-semibold text-[#006194]">3.484 Hectares</span>
+</div>
+</div>
+</div>
+<!-- Buffer Setting -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold text-[#64748b] uppercase tracking-wider">Statutory RoW Buffer</span>
+<span class="text-xs font-mono font-bold text-[#006194]" id="bufferValue">60m (Gazetted)</span>
+</div>
+<div class="p-3.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] flex flex-col gap-2">
+<div class="flex justify-between text-[11px] text-[#64748b]">
+<span>Class C (30m)</span>
+<span class="text-[#006194] font-bold">Class A Trunk (60m)</span>
+<span>120m Bypass</span>
+</div>
+<input class="w-full accent-[#006194] h-2 bg-[#e2e8f0] rounded-lg cursor-pointer" id="bufferRange" max="120" min="30" step="10" type="range" value="60"/>
+<div class="flex items-center gap-1.5 text-[11px] text-[#64748b] mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-amber-600">info</span>
+<span>Per Kenya Roads Act 2007 (Cap 408) Section 23</span>
+</div>
+</div>
+</div>
+<!-- Reference Layers -->
+<div class="flex flex-col gap-2">
+<span class="text-[11px] font-bold text-[#64748b] uppercase tracking-wider">Active Reference Layers</span>
+<div class="flex flex-col gap-1.5">
+<label class="flex items-center justify-between p-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] hover:bg-[#f1f5f9] cursor-pointer transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<input checked="" class="w-4 h-4 rounded text-[#006194] focus:ring-0 border-[#cbd5e1]" type="checkbox"/>
+<span class="text-xs font-medium text-[#1e293b] truncate">KeNHA Bypass Corridor (60m)</span>
+</div>
+<span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+</label>
+<label class="flex items-center justify-between p-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] hover:bg-[#f1f5f9] cursor-pointer transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<input checked="" class="w-4 h-4 rounded text-[#006194] focus:ring-0 border-[#cbd5e1]" type="checkbox"/>
+<span class="text-xs font-medium text-[#1e293b] truncate">Proposed Subdivision Scheme</span>
+</div>
+<span class="w-2.5 h-2.5 rounded-full bg-[#006194]"></span>
+</label>
+<label class="flex items-center justify-between p-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] hover:bg-[#f1f5f9] cursor-pointer transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<input checked="" class="w-4 h-4 rounded text-[#006194] focus:ring-0 border-[#cbd5e1]" type="checkbox"/>
+<span class="text-xs font-medium text-[#1e293b] truncate">KPLC 66kV Transmission Wayleave</span>
+</div>
+<span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+</label>
+</div>
+</div>
+</div>
+<!-- Spatial Compute Stats Box -->
+<div class="p-3.5 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-[#e0f2fe] text-[#006194] flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">memory</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-[#0f172a]">Spatial Compute Engine</span>
+<span class="text-[11px] text-[#64748b] font-mono">Response Time: 42ms</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+<span>Active</span>
+</div>
+</div>
+</div>
+<!-- Column 2: Light Map Canvas & Metrics -->
+<div class="xl:col-span-6 flex flex-col gap-4">
+<div class="relative w-full h-[580px] rounded-xl bg-white border border-[#e2e8f0] overflow-hidden shadow-sm flex flex-col">
+<!-- Crisp Light Map Background -->
+<div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-70" data-location="Southern Bypass Interchange, Dagoretti, Nairobi, Kenya" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmqzA2y5Ba2xB3b2y-KNSohX2-Rz-IlupI3aU2jn07XTlcZz8r9h-hNlxAKQUVL6GNJ-MrPQ7KUA63nl8_PB1h-rU8_HPpF3c5ZsAdcahCiF310E1PdiWgvlLj37dyHhJVg3z-tNuXIxNwDsmCz9rcxXg5iTaYGUuIe3ns51R43XiyGNAqi1WQ-lTdZhp4o_CSSNtDZJ1ZmJUb3EPLmK_g143s_StQOxhq0ZgL8wwk'); filter: saturate(0.85) contrast(1.05) brightness(1.08);"></div>
+<!-- Light Overlay for clarity -->
+<div class="absolute inset-0 bg-white/30 backdrop-blur-[1px]"></div>
+<svg class="absolute inset-0 w-full h-full pointer-events-none select-none" fill="none" viewbox="0 0 800 580" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="40" id="cadGrid" patternunits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 97, 148, 0.08)" stroke-width="0.75"></path>
+</pattern>
+<pattern height="8" id="conflictHatch" patterntransform="rotate(45 0 0)" patternunits="userSpaceOnUse" width="8">
+<line stroke="#e11d48" stroke-width="2.5" x1="0" x2="0" y1="0" y2="8"></line>
+</pattern>
+</defs>
+<rect fill="url(#cadGrid)" height="100%" width="100%"></rect>
+<!-- Buffer corridor line and band -->
+<path d="M-50 330 C220 300, 480 230, 850 140" fill="none" stroke="#0284c7" stroke-opacity="0.18" stroke-width="60"></path>
+<path d="M-50 330 C220 300, 480 230, 850 140" fill="none" stroke="#d97706" stroke-dasharray="8 8" stroke-opacity="0.9" stroke-width="2.5"></path>
+<path d="M-50 300 C220 270, 480 200, 850 110" fill="none" stroke="#e11d48" stroke-dasharray="4 4" stroke-opacity="0.8" stroke-width="1.5"></path>
+<path d="M-50 360 C220 330, 480 260, 850 170" fill="none" stroke="#e11d48" stroke-dasharray="4 4" stroke-opacity="0.8" stroke-width="1.5"></path>
+<!-- Valid clear parcels (crisp blue/green) -->
+<g id="validPolygons" opacity="0.9">
+<polygon fill="#0284c7" fill-opacity="0.18" points="180,120 270,100 290,170 200,190" stroke="#0284c7" stroke-width="2"></polygon>
+<polygon fill="#0284c7" fill-opacity="0.18" points="275,98 365,78 385,150 295,170" stroke="#0284c7" stroke-width="2"></polygon>
+<polygon fill="#0284c7" fill-opacity="0.18" points="370,76 460,56 480,130 390,150" stroke="#0284c7" stroke-width="2"></polygon>
+<polygon fill="#0284c7" fill-opacity="0.18" points="160,200 240,185 260,260 180,275" stroke="#0284c7" stroke-width="2"></polygon>
+<polygon fill="#0284c7" fill-opacity="0.18" points="245,185 325,170 345,245 265,260" stroke="#0284c7" stroke-width="2"></polygon>
+<polygon fill="#0284c7" fill-opacity="0.18" points="330,170 410,152 430,228 350,245" stroke="#0284c7" stroke-width="2"></polygon>
+</g>
+<!-- Conflict parcels (bold red borders and hatch) -->
+<g id="encroachingPolygons">
+<polygon fill="#fee2e2" fill-opacity="0.7" points="230,285 315,268 338,360 250,378" stroke="#e11d48" stroke-width="2.5"></polygon>
+<polygon fill="#fee2e2" fill-opacity="0.7" points="320,267 405,248 428,340 343,360" stroke="#e11d48" stroke-width="2.5"></polygon>
+<polygon fill="#fee2e2" fill-opacity="0.7" points="410,248 495,228 518,320 433,340" stroke="#e11d48" stroke-width="2.5"></polygon>
+<polygon fill="url(#conflictHatch)" points="250,325 330,305 338,360 250,378"></polygon>
+<polygon fill="url(#conflictHatch)" points="332,305 418,282 428,340 343,360"></polygon>
+<polygon fill="url(#conflictHatch)" points="420,282 505,260 518,320 433,340"></polygon>
+</g>
+<circle cx="375" cy="315" fill="#e11d48" fill-opacity="0.15" r="32">
+<animate attributename="r" dur="2s" repeatcount="indefinite" values="24;42;24"></animate>
+<animate attributename="fill-opacity" dur="2s" repeatcount="indefinite" values="0.3;0.05;0.3"></animate>
+</circle>
+<circle cx="375" cy="315" fill="#e11d48" r="5"></circle>
+<line stroke="#e11d48" stroke-dasharray="3 3" stroke-width="1.5" x1="375" x2="480" y1="315" y2="420"></line>
+</svg>
+<!-- Map Top Bar: Badge + Tools -->
+<div class="relative z-10 p-4 flex items-center justify-between pointer-events-none">
+<div class="flex items-center gap-2 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-sm border border-rose-200 pointer-events-auto">
+<span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span>
+<span class="text-xs font-bold text-rose-700 uppercase tracking-wide">3 Violations Visualized</span>
+</div>
+<div class="flex items-center gap-1 bg-white/95 backdrop-blur-md p-1 rounded-lg pointer-events-auto shadow-sm border border-[#e2e8f0]">
+<button class="p-1.5 rounded hover:bg-[#f1f5f9] text-[#475569] hover:text-[#0f172a]" title="Pan"><span class="material-symbols-outlined text-base">pan_tool</span></button>
+<button class="p-1.5 rounded hover:bg-[#f1f5f9] text-[#475569] hover:text-[#0f172a]" title="Polygon Select"><span class="material-symbols-outlined text-base">near_me</span></button>
+<button class="p-1.5 rounded hover:bg-[#f1f5f9] text-[#475569] hover:text-[#0f172a]" title="Measure Distance"><span class="material-symbols-outlined text-base">straighten</span></button>
+<div class="w-px h-4 bg-[#cbd5e1] my-auto"></div>
+<button class="p-1.5 rounded hover:bg-[#f1f5f9] text-[#475569] hover:text-[#0f172a]" title="Zoom In"><span class="material-symbols-outlined text-base">zoom_in</span></button>
+<button class="p-1.5 rounded hover:bg-[#f1f5f9] text-[#475569] hover:text-[#0f172a]" title="Zoom Out"><span class="material-symbols-outlined text-base">zoom_out</span></button>
+<button class="p-1.5 rounded hover:bg-[#f1f5f9] text-[#475569] hover:text-[#0f172a]" title="Reset View"><span class="material-symbols-outlined text-base">crop_free</span></button>
+</div>
+</div>
+<!-- Canvas Coordinates HUD -->
+<div class="absolute top-16 right-4 z-10 w-60 bg-white/95 backdrop-blur-md p-3 rounded-lg shadow-sm border border-[#e2e8f0] flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-[#64748b] text-[11px] uppercase font-bold">
+<span>Canvas Position</span>
+<span class="text-[#006194] font-mono">UTM 37S</span>
+</div>
+<div class="flex flex-col gap-1 text-[11px] font-mono text-[#0f172a]">
+<div class="flex justify-between">
+<span class="text-[#64748b] font-sans">Easting:</span>
+<span class="font-medium">256482.11m E</span>
+</div>
+<div class="flex justify-between">
+<span class="text-[#64748b] font-sans">Northing:</span>
+<span class="font-medium">9856114.39m S</span>
+</div>
+<div class="flex justify-between">
+<span class="text-[#64748b] font-sans">Scale:</span>
+<span class="font-medium">1:2,500</span>
+</div>
+</div>
+</div>
+<!-- Map Alert Banner -->
+<div class="mt-auto relative z-10 p-4 pointer-events-none">
+<div class="pointer-events-auto bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-md border border-rose-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 border border-rose-200">
+<span class="material-symbols-outlined text-2xl">warning</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-rose-700 uppercase tracking-wide">Land Boundary Overlap Detected</span>
+<span class="px-1.5 py-0.5 rounded bg-[#f1f5f9] text-[#334155] font-mono text-[11px] font-semibold border border-[#e2e8f0]">Plot #14, #15, #16</span>
+</div>
+<span class="text-xs text-[#475569] mt-0.5">Subdivision plots penetrate KeNHA Southern Bypass 60-meter gazetted RoW corridor.</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<div class="text-xs font-bold text-rose-700 font-mono">14.8m Overlap</div>
+<div class="text-[11px] text-[#64748b]">Gazette No. 4182</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 3 Summary Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="p-4 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-1">
+<span class="text-[11px] font-bold text-[#64748b] uppercase tracking-wider">Total Conflict Area</span>
+<div class="flex items-baseline gap-1.5">
+<span class="text-2xl font-bold text-rose-700 font-mono">412.6</span>
+<span class="text-xs text-[#64748b] font-mono font-medium">sq. meters</span>
+</div>
+<span class="text-xs text-[#64748b] mt-0.5">Intersection geometry across 3 parcels</span>
+</div>
+<div class="p-4 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-1">
+<span class="text-[11px] font-bold text-[#64748b] uppercase tracking-wider">Spatial Confidence</span>
+<div class="flex items-baseline gap-1.5">
+<span class="text-2xl font-bold text-[#006194] font-mono">100%</span>
+<span class="text-xs font-bold text-emerald-700 uppercase">Deterministic</span>
+</div>
+<span class="text-xs text-[#64748b] mt-0.5">Strict official survey boundary match</span>
+</div>
+<div class="p-4 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-1">
+<span class="text-[11px] font-bold text-[#64748b] uppercase tracking-wider">Permit Status</span>
+<div class="flex items-baseline gap-1.5">
+<span class="text-2xl font-bold text-amber-600 font-mono">HOLD</span>
+<span class="text-xs text-[#64748b] font-mono">ERR_ROW_03</span>
+</div>
+<span class="text-xs text-[#64748b] mt-0.5">Automatic statutory permit hold</span>
+</div>
+</div>
+</div>
+<!-- Column 3: Permit Decision Panel & Audit Trail -->
+<div class="xl:col-span-3 flex flex-col gap-4">
+<div class="p-5 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-[#f1f5f9] pb-3">
+<span class="text-xs font-bold text-[#0f172a] uppercase tracking-wide">Building &amp; Land Permit Review</span>
+<span class="material-symbols-outlined text-[#64748b] text-xl">gavel</span>
+</div>
+<!-- Alert Warning Card -->
+<div class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-rose-700 text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-base">block</span>
+<span>Issuance Blocked</span>
+</div>
+<p class="text-xs text-rose-900 mt-1 leading-relaxed">
+                  Section 42 of Urban Areas &amp; Cities Act precludes approval for plans conflicting with declared national corridors.
+                </p>
+</div>
+<!-- Friendly Action Buttons -->
+<div class="flex flex-col gap-2.5">
+<button class="w-full py-2.5 px-3.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center justify-between transition-colors shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base">check_circle</span>
+<span>Approve Permit</span>
+</div>
+<span class="text-[11px] font-mono uppercase bg-emerald-700 px-1.5 py-0.5 rounded">Admin Only</span>
+</button>
+<button class="w-full py-2.5 px-3.5 rounded-lg bg-[#006194] hover:bg-[#00527c] text-white text-xs font-semibold flex items-center justify-between transition-colors shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base">edit_location_alt</span>
+<span>Request Boundary Adjustment</span>
+</div>
+<span class="text-[11px] font-mono uppercase bg-[#00527c] px-1.5 py-0.5 rounded">Actionable</span>
+</button>
+<button class="w-full py-2 px-3 rounded-lg bg-white border border-[#cbd5e1] hover:bg-[#f1f5f9] text-[#334155] text-xs font-medium flex items-center justify-between transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-[#006194]">auto_fix_high</span>
+<span>Snap &amp; Auto-Realign Plan</span>
+</div>
+<span class="text-[10px] text-[#006194] font-bold uppercase">Suggested</span>
+</button>
+<button class="w-full py-2 px-3 rounded-lg bg-rose-50 border border-rose-200 hover:bg-rose-100 text-rose-700 text-xs font-medium flex items-center justify-between transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base">picture_as_pdf</span>
+<span>Violation Notice PDF</span>
+</div>
+<span class="text-[10px] uppercase font-bold text-rose-800">KeNHA/NCC</span>
+</button>
+<button class="w-full py-2 px-3 rounded-lg bg-white border border-[#cbd5e1] hover:bg-[#f1f5f9] text-[#475569] text-xs font-medium flex items-center justify-between transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base">data_object</span>
+<span>Export Conflict GeoJSON</span>
+</div>
+<span class="material-symbols-outlined text-sm">download</span>
+</button>
+</div>
+<!-- Violation Breakdown List -->
+<div class="flex flex-col gap-2 border-t border-[#f1f5f9] pt-3">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold text-[#64748b] uppercase tracking-wider">Violation Breakdown</span>
+<span class="text-xs font-medium text-[#475569] font-mono">3 Polygons</span>
+</div>
+<div class="flex flex-col gap-1.5 text-xs">
+<div class="p-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-rose-600"></span>
+<span class="font-bold text-[#0f172a]">Plot #14</span>
+</div>
+<span class="font-mono text-xs text-[#475569]">5.2m overlap (114.2 m²)</span>
+</div>
+<div class="p-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-rose-600"></span>
+<span class="font-bold text-[#0f172a]">Plot #15</span>
+</div>
+<span class="font-mono text-xs text-[#475569]">14.8m overlap (188.0 m²)</span>
+</div>
+<div class="p-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-rose-600"></span>
+<span class="font-bold text-[#0f172a]">Plot #16</span>
+</div>
+<span class="font-mono text-xs text-[#475569]">8.4m overlap (110.4 m²)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Corridor Audit Trail -->
+<div class="p-5 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-3.5">
+<div class="flex items-center justify-between border-b border-[#f1f5f9] pb-2.5">
+<span class="text-xs font-bold text-[#0f172a] uppercase tracking-wide">Corridor Audit Trail</span>
+<span class="text-[11px] font-bold text-[#006194]">Dagoretti Bypass</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-start gap-2.5">
+<div class="w-2 h-2 rounded-full bg-rose-600 mt-1 shrink-0"></div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center justify-between gap-1">
+<span class="text-xs font-bold text-[#0f172a] truncate">LR 209/16402 - Rejection</span>
+<span class="text-[11px] text-[#94a3b8] font-mono shrink-0">14d ago</span>
+</div>
+<span class="text-[11px] text-[#64748b] leading-snug">Commercial strip mall encroached 22m into RoW buffer. Notice issued.</span>
+</div>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-2 h-2 rounded-full bg-emerald-600 mt-1 shrink-0"></div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center justify-between gap-1">
+<span class="text-xs font-bold text-[#0f172a] truncate">LR 209/17811 - Boundary Snapped</span>
+<span class="text-[11px] text-[#94a3b8] font-mono shrink-0">1mo ago</span>
+</div>
+<span class="text-[11px] text-[#64748b] leading-snug">Subdivision resubmitted with approved 60m setback line. Clearance granted.</span>
+</div>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-2 h-2 rounded-full bg-amber-500 mt-1 shrink-0"></div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center justify-between gap-1">
+<span class="text-xs font-bold text-[#0f172a] truncate">Gazette Survey Re-indexing</span>
+<span class="text-[11px] text-[#94a3b8] font-mono shrink-0">3mo ago</span>
+</div>
+<span class="text-[11px] text-[#64748b] leading-snug">Survey of Kenya benchmark datum reconciled to Arc 1960 UTM 37S.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Table: Subdivision Plots & Inspection Status -->
+<div class="px-6 pb-8 flex flex-col gap-4">
+<div class="p-5 rounded-xl bg-white border border-[#e2e8f0] shadow-sm flex flex-col gap-4">
+<div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#f1f5f9] pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#006194] text-xl">table_chart</span>
+<h2 class="text-xs font-bold text-[#0f172a] uppercase tracking-wide">Subdivision Plots &amp; Inspection Status</h2>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 text-xs text-[#475569] bg-[#f1f5f9] px-2.5 py-1 rounded-lg border border-[#e2e8f0]">
+<span>Filter:</span>
+<span class="text-[#006194] font-bold">Conflicts Only</span>
+</div>
+<button class="px-3 py-1 rounded-lg bg-white border border-[#cbd5e1] hover:bg-[#f1f5f9] text-[#334155] text-xs font-medium flex items-center gap-1 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm">file_download</span>
+<span>CSV Report</span>
+</button>
+</div>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="bg-[#f8fafc] text-[#64748b] font-bold uppercase text-[11px] border-b border-[#e2e8f0]">
+<th class="py-3 px-4">Plot ID</th>
+<th class="py-3 px-4">Original Area (m²)</th>
+<th class="py-3 px-4">Status</th>
+<th class="py-3 px-4">Encroachment Depth</th>
+<th class="py-3 px-4">Overlap Area (m²)</th>
+<th class="py-3 px-4">Statutory Corridor</th>
+<th class="py-3 px-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#e2e8f0]">
+<tr class="hover:bg-[#f8fafc] transition-colors">
+<td class="py-3 px-4 font-mono text-[#0f172a] font-bold">PL-14</td>
+<td class="py-3 px-4 font-mono text-[#334155]">620.0</td>
+<td class="py-3 px-4">
+<span class="px-2 py-0.5 rounded text-[11px] font-bold uppercase bg-amber-50 text-amber-700 border border-amber-200">Encroached</span>
+</td>
+<td class="py-3 px-4 font-mono text-rose-700 font-semibold">5.20 m</td>
+<td class="py-3 px-4 font-mono text-rose-700 font-semibold">114.20</td>
+<td class="py-3 px-4 text-[#475569]">KeNHA Bypass 60m RoW</td>
+<td class="py-3 px-4 text-right">
+<button class="text-[#006194] hover:text-[#004265] font-semibold">Inspect</button>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fafc] transition-colors">
+<td class="py-3 px-4 font-mono text-[#0f172a] font-bold">PL-15</td>
+<td class="py-3 px-4 font-mono text-[#334155]">615.4</td>
+<td class="py-3 px-4">
+<span class="px-2 py-0.5 rounded text-[11px] font-bold uppercase bg-rose-50 text-rose-700 border border-rose-200">Critical</span>
+</td>
+<td class="py-3 px-4 font-mono text-rose-700 font-semibold">14.80 m</td>
+<td class="py-3 px-4 font-mono text-rose-700 font-semibold">188.00</td>
+<td class="py-3 px-4 text-[#475569]">KeNHA Bypass 60m RoW</td>
+<td class="py-3 px-4 text-right">
+<button class="text-[#006194] hover:text-[#004265] font-semibold">Inspect</button>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fafc] transition-colors">
+<td class="py-3 px-4 font-mono text-[#0f172a] font-bold">PL-16</td>
+<td class="py-3 px-4 font-mono text-[#334155]">630.2</td>
+<td class="py-3 px-4">
+<span class="px-2 py-0.5 rounded text-[11px] font-bold uppercase bg-amber-50 text-amber-700 border border-amber-200">Encroached</span>
+</td>
+<td class="py-3 px-4 font-mono text-rose-700 font-semibold">8.40 m</td>
+<td class="py-3 px-4 font-mono text-rose-700 font-semibold">110.40</td>
+<td class="py-3 px-4 text-[#475569]">KeNHA Bypass 60m RoW</td>
+<td class="py-3 px-4 text-right">
+<button class="text-[#006194] hover:text-[#004265] font-semibold">Inspect</button>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fafc] transition-colors">
+<td class="py-3 px-4 font-mono text-[#0f172a] font-bold">PL-01 to PL-13</td>
+<td class="py-3 px-4 font-mono text-[#334155]">8,450.0</td>
+<td class="py-3 px-4">
+<span class="px-2 py-0.5 rounded text-[11px] font-bold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">Clear</span>
+</td>
+<td class="py-3 px-4 font-mono text-emerald-700 font-semibold">0.00 m</td>
+<td class="py-3 px-4 font-mono text-emerald-700 font-semibold">0.00</td>
+<td class="py-3 px-4 text-[#475569]">Conforms with Setbacks</td>
+<td class="py-3 px-4 text-right">
+<button class="text-[#64748b] hover:text-[#0f172a] font-medium">Inspect</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<script>
+          const slider = document.getElementById('bufferRange');
+          const label = document.getElementById('bufferValue');
+          if (slider && label) {
+            slider.addEventListener('input', (e) => {
+              label.textContent = `${e.target.value}m (Gazetted)`;
+            });
+          }
+        </script>
+</div>
+</main>
+</div>
+</body></html>
