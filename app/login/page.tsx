@@ -31,6 +31,8 @@ function LoginPageContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    if (!supabase) return;
+
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (user) router.replace("/dashboard");
     });
@@ -40,6 +42,12 @@ function LoginPageContent() {
     event.preventDefault();
     setIsSubmitting(true);
     setError("");
+
+    if (!supabase) {
+      setError("Supabase is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.");
+      setIsSubmitting(false);
+      return;
+    }
 
     const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
     if (signInError) {

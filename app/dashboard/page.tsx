@@ -20,6 +20,11 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
+    if (!supabase) {
+      setUserEmail("Supabase not configured");
+      return;
+    }
+
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (!user) {
         router.replace("/login");
@@ -37,6 +42,11 @@ export default function Dashboard() {
   });
 
   const handleLogout = async () => {
+    if (!supabase) {
+      router.replace("/login");
+      return;
+    }
+
     await supabase.auth.signOut();
     router.replace("/login");
   };

@@ -25,6 +25,11 @@ function MapContent() {
       return;
     }
 
+    if (!supabase) {
+      setStatus('Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+      return;
+    }
+
     setStatus('Fetching spatial geometry from PostGIS...');
     const leafletModule = await import('leaflet');
     const L = leafletModule.default;
@@ -84,6 +89,10 @@ function MapContent() {
 
   const loadCorridors = async () => {
     if (!mapInstance.current) return;
+    if (!supabase) {
+      setStatus('Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+      return;
+    }
     setStatus('Loading KeNHA Corridors...');
     
     // Import Leaflet dynamically for the button click

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { type ChangeEvent, type FormEvent, useState } from "react";
+import { supabase } from "../lib/supabase";
 
 type SignUpPath = "student" | "professional";
 
@@ -53,6 +54,11 @@ export default function SignUpPage() {
   const [selectedPath, setSelectedPath] = useState<SignUpPath>("student");
   const [studentForm, setStudentForm] = useState<StudentFormState>(studentDefaults);
   const [professionalForm, setProfessionalForm] = useState<ProfessionalFormState>(professionalDefaults);
+  const [studentFile, setStudentFile] = useState<File | null>(null);
+  const [professionalFile, setProfessionalFile] = useState<File | null>(null);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleStudentChange = (field: keyof StudentFormState, value: string) => {
     setStudentForm((current) => ({ ...current, [field]: value }));
@@ -62,14 +68,176 @@ export default function SignUpPage() {
     setProfessionalForm((current) => ({ ...current, [field]: value }));
   };
 
-  const handleStudentSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log("Student sign-up submitted", studentForm);
+  const uploadVerificationDocument = async (file: File) => {
+    if (!supabase) {
+      throw new Error("Supabase is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.");
+    }
+
+    const safeFileName = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
+    const { data, error: uploadError } = await supabase.storage
+      .from("verification-documents")
+      .upload(safeFileName, file, {
+        cacheControl: "3600",
+        upsert: true,
+      });
+
+    if (uploadError) {
+      throw new Error(uploadError.message);
+    }
+
+    const { data: urlData } = supabase.storage.from("verification-documents").getPublicUrl(data.path);
+    return urlData.publicUrl;
   };
 
-  const handleProfessionalSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const saveRegistrationRecord = async (payload: Record<string, string | null>) => {
+    if (!supabase) {
+      throw new Error("Supabase is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.");
+    }
+
+    const { error: insertError } = await supabase.from("user_registrations").insert(payload);
+    if (insertError) {
+      throw new Error(insertError.message);
+    }
+  };
+
+  const handleStudentSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Professional sign-up submitted", professionalForm);
+    setError("");
+    setSuccess("");
+    setIsSubmitting(true);
+
+    try {
+      if (!supabase) {
+        throw new Error("Supabase is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.");
+      }
+
+      if (studentForm.password !== studentForm.confirmPassword) {
+        throw new Error("Passwords do not match.");
+      }
+
+      const email = studentForm.studentEmail.trim();
+      const password = studentForm.password;
+
+      const { data: authData, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: studentForm.fullName,
+            user_type: "student",
+            institution: studentForm.institution,
+            program: studentForm.program,
+            student_id: studentForm.studentId,
+          },
+        },
+      });
+
+      if (signUpError) {
+        throw new Error(signUpError.message);
+      }
+
+      let documentUrl: string | null = null;
+      if (studentFile) {
+        documentUrl = await uploadVerificationDocument(studentFile);
+      }
+
+      await saveRegistrationRecord({
+        user_id: authData.user?.id ?? null,
+        registration_type: "student",
+        full_name: studentForm.fullName,
+        email,
+        institution: studentForm.institution,
+        program: studentForm.program,
+        student_id: studentForm.studentId,
+        password_hash: null,
+        organization_name: null,
+        organization_type: null,
+        occupation: null,
+        role: null,
+        phone: null,
+        verification_document_url: documentUrl,
+        status: "pending_review",
+      });
+
+      setSuccess("Student registration submitted successfully.");
+      setStudentForm(studentDefaults);
+      setStudentFile(null);
+    } catch (submitError: unknown) {
+      setError(submitError instanceof Error ? submitError.message : "Unable to submit student registration.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleProfessionalSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError("");
+    setSuccess("");
+    setIsSubmitting(true);
+
+    try {
+      if (!supabase) {
+        throw new Error("Supabase is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.");
+      }
+
+      if (professionalForm.password !== professionalForm.confirmPassword) {
+        throw new Error("Passwords do not match.");
+      }
+
+      const email = professionalForm.professionalEmail.trim();
+      const password = professionalForm.password;
+
+      const { data: authData, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: professionalForm.fullName,
+            user_type: "professional",
+            occupation: professionalForm.occupation,
+            organization_name: professionalForm.organizationName,
+            organization_type: professionalForm.organizationType,
+            role: professionalForm.role,
+            phone: professionalForm.phone,
+          },
+        },
+      });
+
+      if (signUpError) {
+        throw new Error(signUpError.message);
+      }
+
+      let documentUrl: string | null = null;
+      if (professionalFile) {
+        documentUrl = await uploadVerificationDocument(professionalFile);
+      }
+
+      await saveRegistrationRecord({
+        user_id: authData.user?.id ?? null,
+        registration_type: "professional",
+        full_name: professionalForm.fullName,
+        email,
+        institution: null,
+        program: null,
+        student_id: null,
+        password_hash: null,
+        organization_name: professionalForm.organizationName,
+        organization_type: professionalForm.organizationType,
+        occupation: professionalForm.occupation,
+        role: professionalForm.role,
+        phone: professionalForm.phone,
+        verification_document_url: documentUrl,
+        status: "pending_review",
+      });
+
+      setSuccess("Professional registration submitted successfully.");
+      setProfessionalForm(professionalDefaults);
+      setProfessionalFile(null);
+    } catch (submitError: unknown) {
+      setError(submitError instanceof Error ? submitError.message : "Unable to submit professional registration.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inputClassName =
@@ -167,6 +335,9 @@ export default function SignUpPage() {
             </button>
           </div>
 
+          {error ? <p className="mt-4 rounded-md border border-[#fecaca] bg-[#fef2f2] px-3 py-2 text-xs text-[#991b1b]">{error}</p> : null}
+          {success ? <p className="mt-4 rounded-md border border-[#bbf7d0] bg-[#ecfdf5] px-3 py-2 text-xs text-[#166534]">{success}</p> : null}
+
           {selectedPath === "student" ? (
             <form onSubmit={handleStudentSubmit} className="mt-6">
               <div className="mb-4">
@@ -257,14 +428,15 @@ export default function SignUpPage() {
                   <input
                     type="file"
                     accept=".pdf,.png,.jpg,.jpeg"
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => setStudentFile(event.target.files?.[0] ?? null)}
                     className="mt-1.5 block w-full cursor-pointer rounded-md border border-dashed border-[#cbd5e1] bg-[#f8fbff] px-3 py-2 text-sm text-[#334155] file:mr-3 file:rounded file:border-0 file:bg-[#e0f2fe] file:px-3 file:py-2 file:text-xs file:font-semibold file:text-[#006194]"
                   />
                   <span className="mt-1 block text-[11px] text-[#64748b]">Upload your student ID, admission letter, or institutional enrollment proof for review.</span>
                 </label>
               </div>
 
-              <button type="submit" className="mt-6 h-11 w-full rounded-md bg-[#006194] px-4 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#00527c]">
-                Submit student registration
+              <button type="submit" disabled={isSubmitting} className="mt-6 h-11 w-full rounded-md bg-[#006194] px-4 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#00527c] disabled:cursor-not-allowed disabled:opacity-60">
+                {isSubmitting ? "Submitting..." : "Submit student registration"}
               </button>
             </form>
           ) : (
@@ -384,14 +556,15 @@ export default function SignUpPage() {
                   <input
                     type="file"
                     accept=".pdf,.png,.jpg,.jpeg"
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => setProfessionalFile(event.target.files?.[0] ?? null)}
                     className="mt-1.5 block w-full cursor-pointer rounded-md border border-dashed border-[#cbd5e1] bg-[#f8fbff] px-3 py-2 text-sm text-[#334155] file:mr-3 file:rounded file:border-0 file:bg-[#e0f2fe] file:px-3 file:py-2 file:text-xs file:font-semibold file:text-[#006194]"
                   />
                   <span className="mt-1 block text-[11px] text-[#64748b]">Upload your official ID, professional licence, or organisation credential for validation.</span>
                 </label>
               </div>
 
-              <button type="submit" className="mt-6 h-11 w-full rounded-md bg-[#006194] px-4 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#00527c]">
-                Submit institutional registration
+              <button type="submit" disabled={isSubmitting} className="mt-6 h-11 w-full rounded-md bg-[#006194] px-4 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#00527c] disabled:cursor-not-allowed disabled:opacity-60">
+                {isSubmitting ? "Submitting..." : "Submit institutional registration"}
               </button>
             </form>
           )}
